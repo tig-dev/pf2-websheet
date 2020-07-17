@@ -78,7 +78,16 @@ const App = () => {
     <div className="app">
       <Layout>
         <Sider className={"app-sider"}>
-          <Header>PF2 WebSheet</Header>
+          <div className={"app-header"}>
+            <img
+              className={"logo"}
+              src={process.env.PUBLIC_URL + "/logo192.png"}
+              alt={
+                "Website icon depicting a gold gear on a dark red square with rounded corners"
+              }
+            />
+            <Header>PF2 WebSheet</Header>
+          </div>
           <div className={"button-group row"}>
             <NewButton state={state} dispatch={dispatch} />
             <LoadButton state={state} dispatch={dispatch} />
@@ -97,32 +106,28 @@ const App = () => {
             >
               Character
             </Menu.Item>
-            <Menu.Item 
-              key="feats" 
-              className={"volcano"} 
+            <Menu.Item
+              key="feats"
+              className={"volcano"}
               icon={<TagsOutlined />}
             >
               Feats
             </Menu.Item>
-            <Menu.Item 
-              key="skills" 
-              className={"orange"} 
+            <Menu.Item
+              key="skills"
+              className={"orange"}
               icon={<BarsOutlined />}
             >
               Skills
             </Menu.Item>
-            <Menu.Item 
-              key="combat" 
-              className={"green"} 
+            <Menu.Item
+              key="combat"
+              className={"green"}
               icon={<AlertOutlined />}
             >
               Combat
             </Menu.Item>
-            <Menu.Item 
-              key="spells" 
-              className={"blue"} 
-              icon={<FireOutlined />}
-            >
+            <Menu.Item key="spells" className={"blue"} icon={<FireOutlined />}>
               Spells
             </Menu.Item>
             <Menu.Item
@@ -132,10 +137,7 @@ const App = () => {
             >
               Inventory
             </Menu.Item>
-            <Menu.Item 
-              key="notes" 
-              className={"purple"}
-              icon={<BookOutlined />}>
+            <Menu.Item key="notes" className={"purple"} icon={<BookOutlined />}>
               Notes
             </Menu.Item>
             <Menu.Item
@@ -164,6 +166,6 @@ const App = () => {
       </Layout>
     </div>
   );
-}
+};
 
 export default App;

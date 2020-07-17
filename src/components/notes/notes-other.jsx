@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { map, debounce, cloneDeep, findIndex, without } from "lodash";
 import { Card, Button, Input } from "antd";
-import { EditFilled, PlusOutlined, CloseOutlined } from "@ant-design/icons";
+import { EditFilled, PlusOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
 import { baseNote } from "../common/base-types";
 
@@ -133,14 +133,12 @@ const OtherNotes = ({ state, dispatch }) => {
                   <div className={"card-header-actions"}>
                     <Button
                       type={"primary"}
-                      // size={"small"}
-                      className={"blue-button"}
-                      icon={<EditFilled />}
+                      className={editing === note.id ? "green-button" : "blue-button"}
+                      icon={editing === note.id ? <CheckOutlined /> : <EditFilled />}
                       onClick={() => toggleEditing(note.id)}
                     />
                     <Button
                       type={"primary"}
-                      // size={"small"}
                       className={"red-button"}
                       icon={<CloseOutlined />}
                       onClick={() => removeOther(note)}

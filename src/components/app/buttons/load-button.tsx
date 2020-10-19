@@ -3,12 +3,15 @@ import { keys, isEqual, map } from "lodash";
 import { Button, Select, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
-import { InitMainState } from "./reducer";
+import { mainStateDefault } from "../../common/defaults";
+import { WithReducerProps } from "../../common/interfaces";
 
 const { Option } = Select;
 const { confirm } = Modal;
 
-const LoadButton = ({ state, dispatch }) => {
+export interface LoadButtonProps extends WithReducerProps {}
+
+const LoadButton = ({ state, dispatch }: LoadButtonProps) => {
   const [loadVisible, setLoadVisible] = useState(false);
   const [toLoadName, setToLoadName] = useState("");
 
@@ -25,7 +28,7 @@ const LoadButton = ({ state, dispatch }) => {
 
   const handleOk = () => {
     setLoadVisible(false);
-    if (!isEqual(state, InitMainState)) {
+    if (!isEqual(state, mainStateDefault)) {
       confirm({
         title: "Do you want to override the current character?",
         icon: <ExclamationCircleOutlined />,
@@ -68,7 +71,7 @@ const LoadButton = ({ state, dispatch }) => {
       >
         <Select
           placeholder={"Select a character"}
-          onChange={(value) => setToLoadName(value)}
+          onChange={(value: string) => setToLoadName(value)}
         >
           {map(keys(localStorage), (name) => {
             return <Option key={name} value={name}>{name}</Option>;

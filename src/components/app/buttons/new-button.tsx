@@ -3,18 +3,21 @@ import { isEqual } from "lodash";
 import { Button, Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
-import { InitMainState } from "./reducer";
+import { mainStateDefault } from "../../common/defaults";
+import { WithReducerProps } from "../../common/interfaces";
 
 const { confirm } = Modal;
 
-const NewButton = ({ state, dispatch }) => {
+export interface NewButtonProps extends WithReducerProps {}
+
+const NewButton = ({ state, dispatch }: NewButtonProps) => {
   const newChar = () => {
     dispatch({ type: "NEW" });
     message.success("Created new character!");
   };
 
   const handleNew = () => {
-    if (!isEqual(state, InitMainState)) {
+    if (!isEqual(state, mainStateDefault)) {
       confirm({
         title: "Do you want to override the current character?",
         icon: <ExclamationCircleOutlined />,

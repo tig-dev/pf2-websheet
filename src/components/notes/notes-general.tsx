@@ -3,12 +3,16 @@ import { cloneDeep, debounce, isNull } from "lodash";
 import { Card, Button, Input } from "antd";
 import { EditFilled, CheckOutlined } from "@ant-design/icons";
 
+import { WithReducerProps } from '../common/interfaces';
+
 const { TextArea } = Input;
 
-const GeneralNotes = ({ state, dispatch }) => {
+export interface GeneralNotesProps extends WithReducerProps {}
+
+const GeneralNotes = ({ state, dispatch }: GeneralNotesProps) => {
   const [editing, setEditing] = useState(false);
 
-  const changeGeneral = (newText = null) => {
+  const changeGeneral = (newText: string | null = null) => {
     let newGeneralNote = cloneDeep(state.notes.general);
 
     if (!isNull(newText)) {

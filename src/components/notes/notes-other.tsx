@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { map, debounce, cloneDeep, findIndex, without } from "lodash";
 import { Card, Button, Input } from "antd";
-import { EditFilled, PlusOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
+import {
+  EditFilled,
+  PlusOutlined,
+  CloseOutlined,
+  CheckOutlined,
+} from "@ant-design/icons";
 
-import { baseNote } from "../common/base-types";
+import { baseNote } from "../common/defaults";
+import { WithReducerProps } from "../common/interfaces";
+import { noteType } from '../common/types';
 
 const { TextArea } = Input;
 
-const OtherNotes = ({ state, dispatch }) => {
+export interface OtherNotesProps extends WithReducerProps {}
+
+const OtherNotes = ({ state, dispatch }: OtherNotesProps) => {
   const [editing, setEditing] = useState(0);
 
   useEffect(() => {
@@ -37,7 +46,7 @@ const OtherNotes = ({ state, dispatch }) => {
     });
   };
 
-  const updateOtherTitle = (id, title) => {
+  const updateOtherTitle = (id: number, title: string) => {
     let newOtherNotes = [...state.notes.other];
     let updateIndex = findIndex(newOtherNotes, ["id", id]);
     let updatedNote = cloneDeep(newOtherNotes[updateIndex]);
@@ -55,7 +64,7 @@ const OtherNotes = ({ state, dispatch }) => {
     });
   };
 
-  const updateOtherText = (id, text) => {
+  const updateOtherText = (id: number, text: string) => {
     let newOtherNotes = [...state.notes.other];
     let updateIndex = findIndex(newOtherNotes, ["id", id]);
     let updatedNote = cloneDeep(newOtherNotes[updateIndex]);
@@ -73,7 +82,7 @@ const OtherNotes = ({ state, dispatch }) => {
     });
   };
 
-  const removeOther = (note) => {
+  const removeOther = (note: noteType) => {
     dispatch({
       type: "NOTES",
       payload: {
@@ -86,7 +95,7 @@ const OtherNotes = ({ state, dispatch }) => {
   const debouncedUpdateTitle = debounce(updateOtherTitle, 300);
   const debouncedUpdateText = debounce(updateOtherText, 300);
 
-  const toggleEditing = (id) => {
+  const toggleEditing = (id: number) => {
     if (editing !== 0) {
       debouncedUpdateTitle.flush();
       debouncedUpdateText.flush();
@@ -133,8 +142,12 @@ const OtherNotes = ({ state, dispatch }) => {
                   <div className={"card-header-actions"}>
                     <Button
                       type={"primary"}
-                      className={editing === note.id ? "green-button" : "blue-button"}
-                      icon={editing === note.id ? <CheckOutlined /> : <EditFilled />}
+                      className={
+                        editing === note.id ? "green-button" : "blue-button"
+                      }
+                      icon={
+                        editing === note.id ? <CheckOutlined /> : <EditFilled />
+                      }
                       onClick={() => toggleEditing(note.id)}
                     />
                     <Button

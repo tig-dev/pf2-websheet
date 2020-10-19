@@ -19,10 +19,12 @@ import Notes from "../notes/notes";
 import References from "../references/references";
 import Skills from "../skills/skills";
 import Spells from "../spells/spells";
-import NewButton from "./new-button";
-import LoadButton from "./load-button";
-import SaveButton from "./save-button";
-import { InitMainState, MainReducer } from "./reducer";
+import CharHeader from "../common/components/char-header";
+import NewButton from "./buttons/new-button";
+import LoadButton from "./buttons/load-button";
+import SaveButton from "./buttons/save-button";
+import { MainReducer } from "./main-reducer";
+import { mainStateDefault } from "../common/defaults";
 
 import "./app.less";
 
@@ -30,9 +32,9 @@ const { Header, Content, Sider, Footer } = Layout;
 
 const App = () => {
   const [currContent, changeCurrContent] = useState("character");
-  const [state, dispatch] = useReducer(MainReducer, InitMainState);
+  const [state, dispatch] = useReducer(MainReducer, mainStateDefault);
 
-  const handleMenuChange = (item) => {
+  const handleMenuChange = (item: any) => {
     changeCurrContent(item.key);
   };
 
@@ -150,6 +152,7 @@ const App = () => {
           </Menu>
         </Sider>
         <Layout className={"app-layout"}>
+          {currContent !== "character" && (<CharHeader />)}
           <Content className={"app-main"}>{mainContent}</Content>
           <Footer className={"app-footer"}>
             This web-app uses trademarks and/or copyrights owned by Paizo Inc.,

@@ -2,11 +2,13 @@ import React from "react";
 import { cloneDeep } from "lodash";
 import { Button, message } from "antd";
 
-const SaveButton = ({ state }) => {
+export interface SaveButtonProps {
+  state: any;
+}
+
+const SaveButton = ({ state }: SaveButtonProps) => {
   const saveChar = () => {
-    localStorage[state.character.name] = JSON.stringify(
-      cloneDeep(state)
-    );
+    localStorage[state.character.name] = JSON.stringify(cloneDeep(state));
     message.success("Saved character!");
   };
 

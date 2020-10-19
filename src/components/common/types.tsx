@@ -11,6 +11,35 @@ export type featCategory =
 export type dieType = { count: number; sides: number };
 export type costType = { count: number; coin: "cp" | "sp" | "gp" | "pp" };
 export type itemLocation = "worn" | "readied" | "other";
+export type armorTypes = "unarmored" | "light" | "medium" | "heavy";
+export type armorGroups = "leather" | "composite" | "chain" | "plate" | "none";
+export type actionCategory =
+  | "free"
+  | "reaction"
+  | "one-action"
+  | "two-action"
+  | "three-action";
+export type physicalDamageTypes =
+  | "bludgeoning"
+  | "piercing"
+  | "slashing"
+  | "precision";
+export type magicDamageTypes =
+  | "acid"
+  | "cold"
+  | "electricity"
+  | "fire"
+  | "sonic"
+  | "positive"
+  | "negative"
+  | "force"
+  | "good"
+  | "evil"
+  | "lawful"
+  | "chaotic"
+  | "mental"
+  | "poison"
+  | "bleed";
 
 export enum abilities {
   STR = "strength",
@@ -21,11 +50,25 @@ export enum abilities {
   CHA = "charisma",
 }
 
+export type dcType = {
+  ability: ability;
+  training: training;
+  misc_bonus: number;
+};
+
+export type actionType = {
+  name: string;
+  traits: string[];
+  description: string;
+  actions: actionCategory;
+};
+
 export type skillType = {
   name: string;
   training: training;
   ability: abilities | null;
   misc_bonus: number;
+  armor_penalty: boolean;
 };
 
 export type featType = {
@@ -34,16 +77,12 @@ export type featType = {
   level: number;
   traits: string[];
   description: string;
-  action: boolean;
-  action_cost?: number;
 };
 
-export type spellType = {
-  name: string;
+export type spellType = actionType & {
   level: spellLevel;
-  traits: string[];
-  description: string;
-  action_cost: number;
+  dice?: dieType[];
+  damage?: magicDamageTypes;
 };
 
 export type spellSlotType = {
@@ -60,6 +99,7 @@ export type noteType = {
 
 export type itemType = {
   name: string;
+  level: number;
   quantity: number;
   bulk: number | "L";
   cost: costType;
@@ -71,15 +111,16 @@ export type containerItemType = itemType & {
   contains: itemType[];
 };
 
-export type attackType = {
-  name: string;
+export type attackType = actionType & {
   ability: ability;
   atk_bonus: number;
   atk_misc: number;
   prof: training;
   dice: dieType;
+  damage: physicalDamageTypes;
   dmg_bonus: number;
   dmg_misc: number;
+  crit_effect: boolean;
 };
 
 export type characterType = {
@@ -88,7 +129,18 @@ export type characterType = {
   heritage: string;
   class: string;
   level: number;
+  exp: number;
   hero_points: number;
+  languages: string;
+  details: string;
+  weapon_training: {
+    simple: training;
+    martial: training;
+    other: {
+      name: string;
+      training: training;
+    }[];
+  };
   abilities: {
     strength: number;
     constitution: number;
@@ -113,13 +165,70 @@ export type attacksListType = {
   ranged: attackType[];
 };
 
+export type savingRollType = {
+  training: training;
+  itemBonus: number;
+  miscBonus: number;
+};
+
+export type hpType = {
+  max: number;
+  current: number;
+  temp: number;
+};
+
+export type speedType = {
+  base: number;
+  types: string;
+  misc_bonus: number;
+};
+
+export type perceptionType = dcType & {
+  item_bonus: number;
+  senses: string;
+};
+
+export type saveSetType = {
+  fortitude: savingRollType;
+  reflex: savingRollType;
+  will: savingRollType;
+};
+
+export type shieldType = {
+  bonus: number;
+  hardness: number;
+  max_hp: number;
+  hp: number;
+  bt: number;
+};
+
+export type armorType = {
+  type: armorTypes;
+  group: armorGroups;
+  training: training;
+  ac_bonus: number;
+  dex_cap: number | null;
+  misc_bonus: number;
+  check_penalty: number;
+  speed_penalty: number;
+  traits: string[];
+  shield?: shieldType;
+};
+
 export type combatType = {
+  hp: hpType;
+  class_dc: dcType | null;
+  speed: speedType;
+  perception: perceptionType;
+  saves: saveSetType;
+  armor: armorType;
   attacks: attacksListType;
 };
 
 export type spellsListType = {
   cantrip_level: number;
   casting_ability: ability | null;
+  spell_training: training;
   slots: spellSlotType[];
   spells: spellType[];
 };

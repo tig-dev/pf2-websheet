@@ -76,6 +76,7 @@ export const baseAttack: attackType = {
 export const mainStateDefault: mainStateType = {
   character: {
     name: "",
+    portrait: "",
     ancestry: "",
     heritage: "",
     class: "",

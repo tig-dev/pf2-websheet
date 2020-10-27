@@ -41,7 +41,7 @@ const App = () => {
   let mainContent = <div>This is no Content</div>;
   switch (currContent) {
     case "character":
-      mainContent = <Character />;
+      mainContent = <Character state={state} dispatch={dispatch} />;
       break;
 
     case "feats":

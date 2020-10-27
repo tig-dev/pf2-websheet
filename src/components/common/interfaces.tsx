@@ -1,4 +1,6 @@
+import { mainStateType, dispatchActionType } from "./types";
+
 export interface WithReducerProps {
-  state: any;
-  dispatch(input: any): void;
+  state: mainStateType;
+  dispatch(action: dispatchActionType): void;
 }

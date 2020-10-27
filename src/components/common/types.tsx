@@ -1,3 +1,5 @@
+import { mainReducerActionType } from "../app/main-reducer";
+
 export type training = "U" | "T" | "E" | "M" | "L";
 export type ability = "STR" | "CON" | "DEX" | "INT" | "WIS" | "CHA";
 export type spellLevel = "cantrip" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
@@ -49,6 +51,11 @@ export enum abilities {
   WIS = "wisdom",
   CHA = "charisma",
 }
+
+export type dispatchActionType = {
+  type: mainReducerActionType;
+  payload?: any;
+};
 
 export type dcType = {
   ability: ability;
@@ -125,6 +132,7 @@ export type attackType = actionType & {
 
 export type characterType = {
   name: string;
+  portrait: string;
   ancestry: string;
   heritage: string;
   class: string;

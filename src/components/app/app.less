@@ -25,7 +25,7 @@
 
     .ant-layout-header {
       color: #ffffff;
-      font-size: 21px;
+      font-size: @header-size;
       font-weight: 700;
       margin: 0;
       padding: 0;
@@ -45,7 +45,7 @@
   }
 
   .ant-menu-item {
-    font-size: 18px;
+    font-size: @header-size;
     padding: 0 24px;
     margin: 0 !important;
 
@@ -55,7 +55,7 @@
     justify-content: flex-start;
 
     .anticon {
-      font-size: 18px;
+      font-size: @header-size;
     }
   }
 }
@@ -73,6 +73,7 @@
     height: 95%;
     padding: 0.75em 1em;
     font-family: @body-font;
+    font-size: 16px;
   }
 
   .app-footer {

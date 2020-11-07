@@ -1,6 +1,6 @@
 import { mainReducerActionType } from "../app/main-reducer";
 
-export type training = "U" | "T" | "E" | "M" | "L";
+export type proficiency = "U" | "T" | "E" | "M" | "L";
 export type ability = "STR" | "CON" | "DEX" | "INT" | "WIS" | "CHA";
 export type spellLevel = "cantrip" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 export type featCategory =
@@ -59,7 +59,7 @@ export type dispatchActionType = {
 
 export type dcType = {
   ability: ability;
-  training: training;
+  training: proficiency;
   misc_bonus: number;
 };
 
@@ -72,7 +72,7 @@ export type actionType = {
 
 export type skillType = {
   name: string;
-  training: training;
+  training: proficiency;
   ability: abilities | null;
   misc_bonus: number;
   armor_penalty: boolean;
@@ -122,7 +122,7 @@ export type attackType = actionType & {
   ability: ability;
   atk_bonus: number;
   atk_misc: number;
-  prof: training;
+  prof: proficiency;
   dice: dieType;
   damage: physicalDamageTypes;
   dmg_bonus: number;
@@ -130,25 +130,28 @@ export type attackType = actionType & {
   crit_effect: boolean;
 };
 
+export type trainingType = {
+  name: string,
+  training: proficiency,
+}
+
 export type characterType = {
   name: string;
   portrait: string;
   ancestry: string;
   heritage: string;
   class: string;
+  background: string;
+  diety: string;
+  alignment: "LG" | "NG" | "CG" | "LN" | "N" | "CN" | "LE" | "NE" | "CE";
+  size: "small" | "medium" | "large";
+  traits: string;
   level: number;
   exp: number;
   hero_points: number;
   languages: string;
   details: string;
-  weapon_training: {
-    simple: training;
-    martial: training;
-    other: {
-      name: string;
-      training: training;
-    }[];
-  };
+  weapon_training: trainingType[];
   abilities: {
     strength: number;
     constitution: number;
@@ -174,7 +177,7 @@ export type attacksListType = {
 };
 
 export type savingRollType = {
-  training: training;
+  training: proficiency;
   itemBonus: number;
   miscBonus: number;
 };
@@ -213,7 +216,7 @@ export type shieldType = {
 export type armorType = {
   type: armorTypes;
   group: armorGroups;
-  training: training;
+  training: proficiency;
   ac_bonus: number;
   dex_cap: number | null;
   misc_bonus: number;
@@ -236,7 +239,7 @@ export type combatType = {
 export type spellsListType = {
   cantrip_level: number;
   casting_ability: ability | null;
-  spell_training: training;
+  spell_training: proficiency;
   slots: spellSlotType[];
   spells: spellType[];
 };

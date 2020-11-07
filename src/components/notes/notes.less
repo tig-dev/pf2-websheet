@@ -15,13 +15,14 @@
     min-width: 49.5%;
     max-height: 850px;
 
-    > .ant-card {
+    >.ant-card {
       height: 100%;
 
-      > .ant-card-body {
+      >.ant-card-body {
         padding: 10px;
         height: 100%;
         overflow-y: scroll;
+        font-size: @body-size;
 
         .note-body {
           height: 100%;
@@ -36,7 +37,7 @@
 
     .card-header {
       font-family: @header-font;
-      font-size: 18px;
+      font-size: @header-size;
       line-height: normal;
       width: 100%;
 
@@ -62,24 +63,32 @@
   }
 
   .general-notes {
-    > .ant-card > .ant-card-body {
+    >.ant-card>.ant-card-body {
       max-height: 800px;
     }
   }
 
   .other-notes {
-    > .ant-card {
-      > .ant-card-body {
+    >.ant-card {
+      >.ant-card-body {
         max-height: 780px;
         padding: 0;
         margin: 10px;
 
-        .ant-card {
+        .other-note-card {
           margin-bottom: 0.5em;
           box-shadow: 0 4px 5px -1px #dddddd;
 
           &:last-child {
             margin-bottom: 0;
+          }
+
+          .ant-card-body {
+            padding: 15px;
+
+            p {
+              margin-bottom: 0;
+            }
           }
         }
       }

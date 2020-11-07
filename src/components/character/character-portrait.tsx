@@ -26,8 +26,7 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
     if (state.character.portrait && !imageUrl) {
       setImageURL(state.character.portrait);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
+  }, [state, imageUrl, setImageURL]);
 
   useEffect(() => {
     if (imageUrl && imageUrl !== state.character.portrait) {
@@ -36,8 +35,7 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
         payload: imageUrl,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imageUrl]);
+  }, [imageUrl, dispatch, state.character.portrait]);
 
   const handlePortraitChange = (info: UploadChangeParam) => {
     if (info.file.status === "uploading") {
@@ -81,9 +79,11 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
     <div className={"character-portrait"}>
       <ImgCrop rotate={true}>
         <Upload
-          name="portrait"
-          listType="picture-card"
-          className="portrait-uploader"
+          name={"portrait"}
+          listType={"picture-card"}
+          className={
+            imageUrl ? "portrait-uploader uploaded" : "portrait-uploader"
+          }
           showUploadList={false}
           onChange={handlePortraitChange}
           onPreview={handlePortraitPreview}

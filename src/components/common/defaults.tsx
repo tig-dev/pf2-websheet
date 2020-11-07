@@ -79,17 +79,35 @@ export const mainStateDefault: mainStateType = {
     portrait: "",
     ancestry: "",
     heritage: "",
-    class: "",
+    class: "Commoner",
+    background: "",
+    diety: "",
+    alignment: "N",
+    size: "medium",
+    traits: "",
     level: 1,
     exp: 0,
     hero_points: 0,
     details: "",
-    languages: "",
-    weapon_training: {
-      martial: "U",
-      simple: "U",
-      other: [],
-    },
+    languages: "Common",
+    weapon_training: [
+      {
+        name: "simple",
+        training: "U",
+      },
+      {
+        name: "martial",
+        training: "U",
+      },
+      {
+        name: "unarmed",
+        training: "U",
+      },
+      {
+        name: "other",
+        training: "U",
+      },
+    ],
     abilities: {
       strength: 10,
       constitution: 10,

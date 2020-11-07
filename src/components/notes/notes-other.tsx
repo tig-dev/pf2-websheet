@@ -123,6 +123,7 @@ const OtherNotes = ({ state, dispatch }: OtherNotesProps) => {
         {map(state.notes.other, (note) => {
           return (
             <Card
+              className={"other-note-card"}
               key={`other-note-${note.id}`}
               title={
                 <div className={"card-header"}>

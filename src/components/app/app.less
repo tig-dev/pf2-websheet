@@ -2,7 +2,7 @@
 @import "../../common.less";
 
 .app,
-.app > .ant-layout {
+.app>.ant-layout {
   height: 100%;
   width: 100%;
 }
@@ -62,7 +62,6 @@
 
 .app-layout {
   height: 100%;
-  margin-left: 200px;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -84,4 +83,11 @@
     padding: 5px 10px;
     margin: 0;
   }
+}
+
+.load-modal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }

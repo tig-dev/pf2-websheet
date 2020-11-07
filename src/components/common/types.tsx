@@ -268,6 +268,7 @@ export type notesListType = {
 };
 
 export type mainStateType = {
+  default: boolean;
   character: characterType;
   feats: featsList;
   skills: skillType[];

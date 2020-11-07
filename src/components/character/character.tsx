@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { Button, Descriptions } from "antd";
-import { EditFilled, CheckOutlined } from "@ant-design/icons";
+import { EditFilled } from "@ant-design/icons";
 
 import "./character.less";
 import CharacterInfo from "./character-info";
 import CharacterDetails from "./character-details";
+import CharacterForm from "./character-form";
 import { WithReducerProps } from "../common/interfaces";
 
 export interface CharacterProps extends WithReducerProps {}
@@ -12,35 +13,32 @@ export interface CharacterProps extends WithReducerProps {}
 function Character({ state, dispatch }: CharacterProps) {
   const [editing, setEditing] = useState<boolean>(false);
 
-  const editButton = useMemo<JSX.Element>(() => {
-    if (!editing) {
-      return (
-        <Button
-          type={"primary"}
-          className={"blue-button"}
-          icon={<EditFilled />}
-          onClick={() => setEditing(true)}
+  if (!editing) {
+    return (
+      <div className={"character-content"}>
+        <Descriptions
+          className={"character-title"}
+          title={state.character.name}
+          extra={
+            <Button
+              type={"primary"}
+              className={"blue-button"}
+              icon={<EditFilled />}
+              onClick={() => setEditing(true)}
+            />
+          }
         />
-      );
-    } else {
-      return (
-        <Button
-          type={"primary"}
-          className={"green-button"}
-          icon={<CheckOutlined />}
-          onClick={() => setEditing(false)}
-        />
-      );
-    }
-  }, [editing, setEditing]);
-
-  return (
-    <div className={"character-content"}>
-      <Descriptions className={"character-title"} title={state.character.name} extra={editButton} />
-      <CharacterInfo state={state} dispatch={dispatch} />
-      <CharacterDetails state={state} dispatch={dispatch} />
-    </div>
-  );
+        <CharacterInfo state={state} dispatch={dispatch} />
+          <CharacterDetails state={state} dispatch={dispatch} />
+      </div>
+    );
+  } else {
+    return (
+      <div className={"character-content"}>
+        <CharacterForm editing={editing} state={state} dispatch={dispatch} />
+      </div>
+    )
+  }
 }
 
 export default Character;

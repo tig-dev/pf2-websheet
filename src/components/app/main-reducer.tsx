@@ -1,9 +1,15 @@
-import { cloneDeep } from "lodash";
+import { assignIn, cloneDeep } from "lodash";
 
 import { mainStateDefault } from "../common/defaults";
 import { mainStateType } from "../common/types";
+import { saveSessionChar } from "../common/utils";
 
-export type mainReducerActionType = "NEW" | "LOAD" | "PORTRAIT" | "NOTES";
+export type mainReducerActionType =
+  | "NEW"
+  | "LOAD"
+  | "CHARACTER"
+  | "PORTRAIT"
+  | "NOTES";
 
 interface MainReducerProps {
   (
@@ -13,25 +19,32 @@ interface MainReducerProps {
 }
 
 export const MainReducer: MainReducerProps = (state, action) => {
+  let newState = cloneDeep(state);
+
   switch (action.type) {
     case "NEW": {
-      return cloneDeep(mainStateDefault);
+      newState = cloneDeep(mainStateDefault);
+      break;
     }
 
     case "LOAD": {
-      return cloneDeep(action.payload);
+      newState = assignIn(newState, action.payload);
+      break;
+    }
+
+    case "CHARACTER": {
+      newState = assignIn(newState, cloneDeep(newState.character));
+      break;
     }
 
     case "PORTRAIT": {
       // action.payload: base64 string for the image
-      let newState = cloneDeep(state);
-      return {
-        ...newState,
-        character: {
-          ...newState.character,
-          portrait: action.payload,
-        },
-      };
+      let newCharacter = cloneDeep(newState.character);
+      newCharacter = assignIn(newCharacter, {
+        portrait: action.payload,
+      });
+      newState = assignIn(newState, { character: newCharacter });
+      break;
     }
 
     case "NOTES": {
@@ -39,28 +52,32 @@ export const MainReducer: MainReducerProps = (state, action) => {
       //     general: boolean,
       //     value: {title: string, text: string} OR {title: string, text: string}[]
       // }
-      let newState = cloneDeep(state);
       if (action.payload.general) {
-        return {
-          ...newState,
-          notes: {
-            ...newState.notes,
-            general: cloneDeep(action.payload.value),
-          },
-        };
+        let newNotes = cloneDeep(newState.notes);
+        newNotes = assignIn(newNotes, {
+          general: cloneDeep(action.payload.value),
+        });
+        newState = assignIn(newState, {
+          notes: newNotes,
+        });
       } else {
-        return {
-          ...newState,
-          notes: {
-            ...newState.notes,
-            other: [...action.payload.value],
-          },
-        };
+        let newNotes = cloneDeep(newState.notes);
+        newNotes = assignIn(newNotes, {
+          other: [...action.payload.value],
+        });
+        newState = assignIn(newState, {
+          notes: newNotes,
+        });
       }
+      break;
     }
 
     default: {
-      return state;
+      newState = state;
+      break;
     }
   }
+
+  saveSessionChar(newState);
+  return newState;
 };

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { keys, isEqual, map } from "lodash";
-import { Button, Select, Modal, message } from "antd";
+import { Button, Select, Modal, message, Checkbox } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 import { mainStateDefault } from "../../common/defaults";
 import { WithReducerProps } from "../../common/interfaces";
+import { setAndGetDefaultChar, checkIfDefault } from "../../common/utils";
 
 const { Option } = Select;
 const { confirm } = Modal;
@@ -12,18 +13,26 @@ const { confirm } = Modal;
 export interface LoadButtonProps extends WithReducerProps {}
 
 const LoadButton = ({ state, dispatch }: LoadButtonProps) => {
-  const [loadVisible, setLoadVisible] = useState(false);
-  const [toLoadName, setToLoadName] = useState("");
+  const [loadVisible, setLoadVisible] = useState<boolean>(false);
+  const [toLoadName, setToLoadName] = useState<string>("");
+  const [makeDefault, setMakeDefault] = useState<boolean>(false);
 
   const loadChar = () => {
-    if(toLoadName) {
+    if (toLoadName) {
+      if (makeDefault) {
+        dispatch({
+          type: "LOAD",
+          payload: setAndGetDefaultChar(toLoadName),
+        });
+      }
       dispatch({
-        type: 'LOAD',
-        payload: JSON.parse(localStorage[toLoadName])
-      })
+        type: "LOAD",
+        payload: JSON.parse(localStorage[toLoadName]),
+      });
     } else {
-      message.error("No character selected!")
+      message.error("No character selected!");
     }
+    setToLoadName("");
   };
 
   const handleOk = () => {
@@ -69,14 +78,26 @@ const LoadButton = ({ state, dispatch }: LoadButtonProps) => {
         okText={"Load"}
         onCancel={() => setLoadVisible(false)}
       >
-        <Select
-          placeholder={"Select a character"}
-          onChange={(value: string) => setToLoadName(value)}
-        >
-          {map(keys(localStorage), (name) => {
-            return <Option key={name} value={name}>{name}</Option>;
-          })}
-        </Select>
+        <div className={"load-modal"}>
+          <Select
+            placeholder={"Select a character"}
+            onChange={(value: string) => setToLoadName(value)}
+          >
+            {map(keys(localStorage), (name) => {
+              return (
+                <Option key={name} value={name}>
+                  {name}
+                </Option>
+              );
+            })}
+          </Select>
+          <Checkbox
+            onChange={(e) => setMakeDefault(e.target.checked)}
+            disabled={!toLoadName || checkIfDefault(toLoadName)}
+          >
+            Make this character the default?
+          </Checkbox>
+        </div>
       </Modal>
     </div>
   );

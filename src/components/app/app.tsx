@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { Layout, Menu } from "antd";
 import {
   UserOutlined,
@@ -11,6 +11,7 @@ import {
   FileSearchOutlined,
 } from "@ant-design/icons";
 
+import "./app.less";
 import Character from "../character/character";
 import Combat from "../combat/combat";
 import Feats from "../feats/feats";
@@ -25,14 +26,32 @@ import LoadButton from "./buttons/load-button";
 import SaveButton from "./buttons/save-button";
 import { MainReducer } from "./main-reducer";
 import { mainStateDefault } from "../common/defaults";
-
-import "./app.less";
+import {
+  checkForDefault,
+  getDefaultChar,
+  checkForSessionChar,
+  getSessionChar,
+} from "../common/utils";
 
 const { Header, Content, Sider, Footer } = Layout;
 
 const App = () => {
   const [currContent, changeCurrContent] = useState("character");
   const [state, dispatch] = useReducer(MainReducer, mainStateDefault);
+
+  useEffect(() => {
+    if (checkForSessionChar()) {
+      dispatch({
+        type: "LOAD",
+        payload: getSessionChar(),
+      });
+    } else if (checkForDefault()) {
+      dispatch({
+        type: "LOAD",
+        payload: getDefaultChar(),
+      });
+    }
+  }, []);
 
   const handleMenuChange = (item: any) => {
     changeCurrContent(item.key);
@@ -152,7 +171,7 @@ const App = () => {
           </Menu>
         </Sider>
         <Layout className={"app-layout"}>
-          {currContent !== "character" && (<CharHeader />)}
+          {currContent !== "character" && <CharHeader />}
           <Content className={"app-main"}>{mainContent}</Content>
           <Footer className={"app-footer"}>
             This web-app uses trademarks and/or copyrights owned by Paizo Inc.,

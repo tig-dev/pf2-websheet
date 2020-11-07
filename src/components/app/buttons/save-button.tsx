@@ -1,23 +1,20 @@
 import React from "react";
-import { cloneDeep } from "lodash";
-import { Button, message } from "antd";
+import { Button } from "antd";
+
+import { saveLocalChar } from "../../common/utils";
+import { mainStateType } from "../../common/types";
 
 export interface SaveButtonProps {
-  state: any;
+  state: mainStateType;
 }
 
 const SaveButton = ({ state }: SaveButtonProps) => {
-  const saveChar = () => {
-    localStorage[state.character.name] = JSON.stringify(cloneDeep(state));
-    message.success("Saved character!");
-  };
-
   return (
     <Button
       type={"primary"}
       className={"green-button"}
       size={"small"}
-      onClick={saveChar}
+      onClick={() => saveLocalChar(state)}
     >
       Save
     </Button>

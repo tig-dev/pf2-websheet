@@ -81,7 +81,9 @@ function CharacterDetails({ state, dispatch }: CharacterDetailsProps) {
         <DescriptionsItem label={"Weapon Proficiences"} span={6}>
           <div className={"details-profs"}>
             {map(weapon_training, (prof: trainingType) => {
-              return <WeaponProf proficiency={prof} />;
+              return (
+                <WeaponProf proficiency={prof} key={`prof-${prof.name}`} />
+              );
             })}
           </div>
         </DescriptionsItem>

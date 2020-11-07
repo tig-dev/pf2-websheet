@@ -74,6 +74,7 @@ export const baseAttack: attackType = {
 };
 
 export const mainStateDefault: mainStateType = {
+  default: false,
   character: {
     name: "",
     portrait: "",

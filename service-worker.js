@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pf2-websheet/precache-manifest.a426924d796cc977a95444a8030b1c20.js"
+  "/pf2-websheet/precache-manifest.816112b46cd8847a774e25e741ebd8f0.js"
 );
 
 self.addEventListener('message', (event) => {

@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5d5155edcdedc0b05ae4663142ca323f",
+    "revision": "ca7f47e3874b36128e6440f7b8cf8174",
     "url": "/pf2-websheet/index.html"
   },
   {
-    "revision": "7106163b78d176c6e8d8",
-    "url": "/pf2-websheet/static/css/2.3ce59d8d.chunk.css"
+    "revision": "2e5d4d809240e4b35e1f",
+    "url": "/pf2-websheet/static/css/2.ba6f2792.chunk.css"
   },
   {
     "revision": "9281f1e76bb4007710b0",
     "url": "/pf2-websheet/static/css/main.2018b89e.chunk.css"
   },
   {
-    "revision": "7106163b78d176c6e8d8",
+    "revision": "2e5d4d809240e4b35e1f",
     "url": "/pf2-websheet/static/js/2.85ed8809.chunk.js"
   },
   {

@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/pf2-websheet/static/css/main.2018b89e.chunk.css",
-    "main.js": "/pf2-websheet/static/js/main.cbfe135d.chunk.js",
-    "main.js.map": "/pf2-websheet/static/js/main.cbfe135d.chunk.js.map",
+    "main.css": "/pf2-websheet/static/css/main.5c9e3a38.chunk.css",
+    "main.js": "/pf2-websheet/static/js/main.5058bc59.chunk.js",
+    "main.js.map": "/pf2-websheet/static/js/main.5058bc59.chunk.js.map",
     "runtime-main.js": "/pf2-websheet/static/js/runtime-main.e51ee0a6.js",
     "runtime-main.js.map": "/pf2-websheet/static/js/runtime-main.e51ee0a6.js.map",
-    "static/css/2.7bc9aa30.chunk.css": "/pf2-websheet/static/css/2.7bc9aa30.chunk.css",
-    "static/js/2.108670fb.chunk.js": "/pf2-websheet/static/js/2.108670fb.chunk.js",
-    "static/js/2.108670fb.chunk.js.map": "/pf2-websheet/static/js/2.108670fb.chunk.js.map",
+    "static/css/2.b760e298.chunk.css": "/pf2-websheet/static/css/2.b760e298.chunk.css",
+    "static/js/2.85ed8809.chunk.js": "/pf2-websheet/static/js/2.85ed8809.chunk.js",
+    "static/js/2.85ed8809.chunk.js.map": "/pf2-websheet/static/js/2.85ed8809.chunk.js.map",
     "index.html": "/pf2-websheet/index.html",
-    "precache-manifest.6038e27295ffee66f4b5e30bbfb2e18d.js": "/pf2-websheet/precache-manifest.6038e27295ffee66f4b5e30bbfb2e18d.js",
+    "precache-manifest.046183e994e50b621b1c1027c9ae685e.js": "/pf2-websheet/precache-manifest.046183e994e50b621b1c1027c9ae685e.js",
     "service-worker.js": "/pf2-websheet/service-worker.js",
-    "static/css/2.7bc9aa30.chunk.css.map": "/pf2-websheet/static/css/2.7bc9aa30.chunk.css.map",
-    "static/css/main.2018b89e.chunk.css.map": "/pf2-websheet/static/css/main.2018b89e.chunk.css.map",
-    "static/js/2.108670fb.chunk.js.LICENSE.txt": "/pf2-websheet/static/js/2.108670fb.chunk.js.LICENSE.txt"
+    "static/css/2.b760e298.chunk.css.map": "/pf2-websheet/static/css/2.b760e298.chunk.css.map",
+    "static/css/main.5c9e3a38.chunk.css.map": "/pf2-websheet/static/css/main.5c9e3a38.chunk.css.map",
+    "static/js/2.85ed8809.chunk.js.LICENSE.txt": "/pf2-websheet/static/js/2.85ed8809.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e51ee0a6.js",
-    "static/css/2.7bc9aa30.chunk.css",
-    "static/js/2.108670fb.chunk.js",
-    "static/css/main.2018b89e.chunk.css",
-    "static/js/main.cbfe135d.chunk.js"
+    "static/css/2.b760e298.chunk.css",
+    "static/js/2.85ed8809.chunk.js",
+    "static/css/main.5c9e3a38.chunk.css",
+    "static/js/main.5058bc59.chunk.js"
   ]
 }

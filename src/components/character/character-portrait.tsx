@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Upload, Tooltip } from "antd";
 import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
-import { UploadChangeParam } from "antd/lib/upload";
 import ImgCrop from "antd-img-crop";
 import { isNil } from "lodash";
 
@@ -16,7 +15,6 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
 
   const outerReader = new FileReader();
   outerReader.onloadend = () => {
-    console.log("finished read!");
     if (typeof outerReader.result === "string") {
       setImageURL(outerReader.result);
       setLoading(false);
@@ -31,27 +29,12 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
 
   useEffect(() => {
     if (imageUrl && imageUrl !== state.character.portrait) {
-      console.log("dispatching portrait!");
       dispatch({
         type: "PORTRAIT",
         payload: imageUrl,
       });
     }
   }, [imageUrl, dispatch, state.character.portrait]);
-
-  const handlePortraitChange = (info: UploadChangeParam) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      let file = info.file.originFileObj;
-      if (!isNil(file)) {
-        console.log("starting read now!");
-        outerReader.readAsDataURL(file);
-      }
-    }
-  };
 
   const handlePortraitPreview = async (file: UploadFile<any>) => {
     let src = file.url;
@@ -60,21 +43,17 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
         const reader = new FileReader();
         reader.onloadend = () => {
           if (typeof reader.result === "string") {
-            console.log("resolving preview now!");
             resolve(reader.result);
           }
         };
 
         if (!isNil(file.originFileObj)) {
-          console.log("starting preview read now!");
           reader.readAsDataURL(file.originFileObj);
         }
       });
     }
 
     if (src) {
-      console.log("setting up preview display!");
-      console.log({ src });
       const image = new Image();
       image.src = src;
       const imgWindow = window.open(src);
@@ -93,9 +72,11 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
           }
           showUploadList={false}
           multiple={false}
-          onChange={handlePortraitChange}
-          beforeUpload={() => false}
           onPreview={handlePortraitPreview}
+          beforeUpload={(file) => {
+            outerReader.readAsDataURL(file);
+            return false;
+          }}
         >
           {imageUrl ? (
             <Tooltip title={"Replace image?"}>

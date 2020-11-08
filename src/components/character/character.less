@@ -42,6 +42,21 @@
     justify-content: center;
     align-items: center;
 
+    @media(max-height: 768px) {
+        .ant-descriptions {
+            .ant-descriptions-item-content {
+                font-size: 14px;
+
+            }
+
+            .ant-descriptions-item-label {
+                font-size: 16px;
+                font-weight: 500;
+                font-family: @header-font;
+            }
+        }
+    }
+
     .ant-descriptions {
         .ant-descriptions-item-content {
             font-size: @body-size;
@@ -50,7 +65,6 @@
         .ant-descriptions-item-label {
             font-size: @subheader-size;
             font-weight: 500;
-            max-width: min-content;
             font-family: @header-font;
         }
     }
@@ -86,6 +100,14 @@
             .ant-descriptions-view {
                 border-bottom: none;
                 border-radius: 2px 2px 0 0;
+            }
+        }
+
+
+        @media(min-height: 768px) {
+            .character-portrait {
+                height: 175px;
+                width: 175px;
             }
         }
 
@@ -188,4 +210,76 @@
             flex-grow: 1;
         }
     }
+
+    .character-form {
+        max-height: 80vh;
+        max-width: calc(100vw - 200px);
+        width: @sheet-width;
+
+        padding-top: 10px;
+
+        display: flex;
+        flex-flow: column nowrap;
+
+        height: 90%;
+        width: 100%;
+
+        .character-form-weapons {
+            #form-weapons-head {
+                font-family: @header-font;
+                font-size: 16px;
+            }
+
+            label {
+                padding-left: 5px;
+            }
+        }
+
+        @media(min-height: 768px) {
+            .ant-form-item {
+                margin-bottom: 10px;
+            }
+        }
+
+        .ant-form-item {
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-bottom: 15px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            label {
+                font-family: @header-font;
+                font-size: 16px;
+                max-width: 110px;
+                line-height: 1;
+                white-space: normal;
+                overflow-wrap: normal;
+            }
+
+            .ant-form-item-control {
+                font-size: 15px;
+                width: 100%;
+
+                .ant-input-number {
+                    width: unset;
+                }
+
+            }
+        }
+
+        .character-form-btn {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            .ant-btn {
+                width: 30%;
+            }
+        }
+    }
+
 }

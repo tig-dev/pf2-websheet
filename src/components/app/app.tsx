@@ -36,7 +36,17 @@ import {
 const { Header, Content, Sider, Footer } = Layout;
 
 const App = () => {
-  const [currContent, changeCurrContent] = useState("character");
+  const [currContent, changeCurrContent] = useState<
+    | "character"
+    | "feats"
+    | "skills"
+    | "combat"
+    | "spells"
+    | "inventory"
+    | "notes"
+    | "reference"
+  >("character");
+  const [collapsed, setCollapsed] = useState<boolean>(window.innerHeight < 800);
   const [state, dispatch] = useReducer(MainReducer, mainStateDefault);
 
   useEffect(() => {
@@ -54,7 +64,9 @@ const App = () => {
   }, []);
 
   const handleMenuChange = (item: any) => {
-    changeCurrContent(item.key);
+    if (!["new-action", "load-action", "save-action"].includes(item.key)) {
+      changeCurrContent(item.key);
+    }
   };
 
   let mainContent = <div>This is no Content</div>;
@@ -98,7 +110,12 @@ const App = () => {
   return (
     <div className="app">
       <Layout>
-        <Sider className={"app-sider"}>
+        <Sider
+          className={"app-sider"}
+          collapsible={true}
+          collapsed={collapsed}
+          onCollapse={(collapsed) => setCollapsed(collapsed)}
+        >
           <div className={"app-header"}>
             <img
               className={"logo"}
@@ -107,9 +124,9 @@ const App = () => {
                 "Website icon depicting a gold gear on a dark red square with rounded corners"
               }
             />
-            <Header>PF2 WebSheet</Header>
+            {!collapsed && <Header>PF2 WebSheet</Header>}
           </div>
-          <div className={"button-group row"}>
+          <div className={!collapsed ? "button-group row" : "button-group col"}>
             <NewButton state={state} dispatch={dispatch} />
             <LoadButton state={state} dispatch={dispatch} />
             <SaveButton state={state} />

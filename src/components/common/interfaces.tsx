@@ -6,7 +6,7 @@ export interface WithReducerProps {
 }
 
 export interface EditStateWithReducerProps {
-  editing: boolean;
+  setEditing(val: boolean): void;
   state: mainStateType;
   dispatch(action: dispatchActionType): void;
 }

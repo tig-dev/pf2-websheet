@@ -2,13 +2,15 @@ import React, { CSSProperties } from "react";
 import { startCase } from "lodash";
 import { Radio } from "antd";
 
-import { trainingType } from "../types";
+import { trainingType, proficiency as profLevel } from '../types';
 
 export interface WeaponProfProps {
   proficiency: trainingType;
+  disable?: boolean;
+  setProf?(prof: profLevel): void
 }
 
-function WeaponProf({ proficiency }: WeaponProfProps) {
+function WeaponProf({ proficiency, disable=true, setProf }: WeaponProfProps) {
   const { name, training } = proficiency;
   const styleProps: CSSProperties = {
     display: "flex",
@@ -39,19 +41,19 @@ function WeaponProf({ proficiency }: WeaponProfProps) {
         value={training}
         size={"small"}
       >
-        <Radio style={styleProps} value={"U"} disabled={training !== "U"}>
+        <Radio style={styleProps} value={"U"} disabled={disable && training !== "U"}>
           U
         </Radio>
-        <Radio style={styleProps} value={"T"} disabled={training !== "T"}>
+        <Radio style={styleProps} value={"T"} disabled={disable && training !== "T"}>
           T
         </Radio>
-        <Radio style={styleProps} value={"E"} disabled={training !== "E"}>
+        <Radio style={styleProps} value={"E"} disabled={disable && training !== "E"}>
           E
         </Radio>
-        <Radio style={styleProps} value={"M"} disabled={training !== "M"}>
+        <Radio style={styleProps} value={"M"} disabled={disable && training !== "M"}>
           M
         </Radio>
-        <Radio style={styleProps} value={"L"} disabled={training !== "L"}>
+        <Radio style={styleProps} value={"L"} disabled={disable && training !== "L"}>
           L
         </Radio>
       </Radio.Group>

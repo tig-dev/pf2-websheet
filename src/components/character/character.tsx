@@ -29,15 +29,23 @@ function Character({ state, dispatch }: CharacterProps) {
           }
         />
         <CharacterInfo state={state} dispatch={dispatch} />
-          <CharacterDetails state={state} dispatch={dispatch} />
+        <CharacterDetails state={state} dispatch={dispatch} />
       </div>
     );
   } else {
     return (
       <div className={"character-content"}>
-        <CharacterForm editing={editing} state={state} dispatch={dispatch} />
+        <Descriptions
+          className={"character-title"}
+          title={"Edit Character Information"}
+        />
+        <CharacterForm
+          setEditing={setEditing}
+          state={state}
+          dispatch={dispatch}
+        />
       </div>
-    )
+    );
   }
 }
 

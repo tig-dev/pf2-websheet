@@ -103,11 +103,7 @@ export const mainStateDefault: mainStateType = {
       {
         name: "unarmed",
         training: "U",
-      },
-      {
-        name: "other",
-        training: "U",
-      },
+      }
     ],
     abilities: {
       strength: 10,

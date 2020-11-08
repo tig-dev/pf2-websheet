@@ -33,7 +33,10 @@ export const MainReducer: MainReducerProps = (state, action) => {
     }
 
     case "CHARACTER": {
-      newState = assignIn(newState, cloneDeep(newState.character));
+      // action.payload: characterType object
+      let newCharacter = cloneDeep(newState.character);
+      newCharacter = assignIn(newCharacter, action.payload);
+      newState = assignIn(newState, { character: newCharacter });
       break;
     }
 

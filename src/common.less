@@ -10,21 +10,29 @@
 div.button-group {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+
+
+  .ant-btn {
+    min-width: 55px;
+  }
 
   &.row {
     margin: 5px;
     flex-direction: row;
-    align-items: center;
-
-    .ant-btn {
-      min-width: 55px;
-    }
   }
 
   &.col {
     flex-direction: column;
-    align-items: flex-start;
+
+    .ant-btn {
+      margin-bottom: 5px;
+    }
   }
+}
+
+div.ant-tooltip {
+  font-family: @header-font;
 }
 
 div.ant-card-head {
@@ -42,6 +50,8 @@ div.ant-card-head {
 }
 
 .green-button {
+  font-weight: 600;
+  font-family: @header-font;
   border-radius: 4px;
   background-color: @green-7;
   border-color: @green-8;
@@ -55,6 +65,8 @@ div.ant-card-head {
 }
 
 .blue-button {
+  font-weight: 600;
+  font-family: @header-font;
   border-radius: 4px;
   background-color: @blue-7;
   border-color: @blue-8;
@@ -68,6 +80,8 @@ div.ant-card-head {
 }
 
 .red-button {
+  font-weight: 600;
+  font-family: @header-font;
   border-radius: 4px;
   background-color: @red-7;
   border-color: @red-8;

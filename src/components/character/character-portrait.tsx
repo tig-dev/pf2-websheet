@@ -14,10 +14,11 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
   const [imageUrl, setImageURL] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const reader = new FileReader();
-  reader.onloadend = () => {
-    if (typeof reader.result === "string") {
-      setImageURL(reader.result);
+  const outerReader = new FileReader();
+  outerReader.onloadend = () => {
+    console.log("finished read!")
+    if (typeof outerReader.result === "string") {
+      setImageURL(outerReader.result);
       setLoading(false);
     }
   };
@@ -30,6 +31,7 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
 
   useEffect(() => {
     if (imageUrl && imageUrl !== state.character.portrait) {
+      console.log("dispatching portrait!")
       dispatch({
         type: "PORTRAIT",
         payload: imageUrl,
@@ -45,7 +47,8 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
     if (info.file.status === "done") {
       let file = info.file.originFileObj;
       if (!isNil(file)) {
-        reader.readAsDataURL(file);
+        console.log("starting read now!")
+        outerReader.readAsDataURL(file);
       }
     }
   };

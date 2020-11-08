@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4252f3fc1b9ffc0ee5293a64f954f553",
+    "revision": "f2d0b835ab740ec9b461cffdb28ab4bb",
     "url": "/pf2-websheet/index.html"
   },
   {
-    "revision": "0ef6564d8bde5cba35a6",
-    "url": "/pf2-websheet/static/css/2.7248f444.chunk.css"
+    "revision": "14bd74ac1cea2b63212d",
+    "url": "/pf2-websheet/static/css/2.d7218d4e.chunk.css"
   },
   {
-    "revision": "f080a2816e501d8255ad",
-    "url": "/pf2-websheet/static/css/main.5c9e3a38.chunk.css"
+    "revision": "e51a5c1e01d912800239",
+    "url": "/pf2-websheet/static/css/main.2018b89e.chunk.css"
   },
   {
-    "revision": "0ef6564d8bde5cba35a6",
+    "revision": "14bd74ac1cea2b63212d",
     "url": "/pf2-websheet/static/js/2.85ed8809.chunk.js"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pf2-websheet/static/js/2.85ed8809.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f080a2816e501d8255ad",
+    "revision": "e51a5c1e01d912800239",
     "url": "/pf2-websheet/static/js/main.f45727e4.chunk.js"
   },
   {

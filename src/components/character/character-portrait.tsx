@@ -84,7 +84,7 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
 
   return (
     <div className={"character-portrait"}>
-      <ImgCrop rotate={true}>
+      {/* <ImgCrop rotate={true}> */}
         <Upload
           name={"portrait"}
           listType={"picture-card"}
@@ -93,7 +93,7 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
           }
           showUploadList={false}
           onChange={handlePortraitChange}
-          onPreview={handlePortraitPreview}
+          // onPreview={handlePortraitPreview}
         >
           {imageUrl ? (
             <Tooltip title={"Replace image?"}>
@@ -109,7 +109,7 @@ function CharacterPortrait({ state, dispatch }: CharacterPortraitProps) {
             </div>
           )}
         </Upload>
-      </ImgCrop>
+      {/* </ImgCrop> */}
     </div>
   );
 }

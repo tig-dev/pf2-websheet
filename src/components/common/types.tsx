@@ -1,6 +1,13 @@
 import { mainReducerActionType } from "../app/main-reducer";
 
 export type proficiency = "U" | "T" | "E" | "M" | "L";
+export enum proficinecyBonuses {
+  "U" = 0,
+  "T" = 2,
+  "E" = 4,
+  "M" = 6,
+  "L" = 8
+}
 export type ability = "STR" | "CON" | "DEX" | "INT" | "WIS" | "CHA";
 export type spellLevel = "cantrip" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 export type featCategory =
@@ -135,7 +142,7 @@ export type trainingType = {
   training: proficiency,
 }
 
-export type characterType = {
+export type characterInfoType = {
   name: string;
   portrait: string;
   ancestry: string;
@@ -143,14 +150,28 @@ export type characterType = {
   class: string;
   background: string;
   diety: string;
+  age: number;
+  gender: string;
+  pronouns: string;
+  height: string;
+  weight: string;
+  personality: {
+    attitude: string;
+    beliefs: string;
+    likes: string;
+    dislikes: string;
+    catchphrases: string;
+  }
+}
+
+export type characterDetailsType = {
+  traits: string;
   alignment: "LG" | "NG" | "CG" | "LN" | "N" | "CN" | "LE" | "NE" | "CE";
   size: "small" | "medium" | "large";
-  traits: string;
   level: number;
   exp: number;
   hero_points: number;
-  languages: string;
-  details: string;
+  languages: string;  
   weapon_training: trainingType[];
   abilities: {
     strength: number;
@@ -160,6 +181,12 @@ export type characterType = {
     wisdom: number;
     charisma: number;
   };
+}
+
+export type characterType = {
+  info: characterInfoType;
+  details: characterDetailsType;
+  story: string;
 };
 
 export type featsList = {

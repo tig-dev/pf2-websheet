@@ -1,5 +1,4 @@
 import React from "react";
-import { startCase } from "lodash";
 import { Descriptions } from "antd";
 import DescriptionsItem from "antd/lib/descriptions/Item";
 
@@ -14,29 +13,60 @@ function CharacterInfo({ state, dispatch }: CharacterInfoProps) {
     heritage,
     background,
     class: charClass,
-    level,
-    exp,
-    hero_points,
-    size,
     diety,
-    alignment,
-  } = state.character;
+    age,
+    gender,
+    pronouns,
+    height,
+    weight,
+    personality,
+  } = state.character.info;
 
   return (
-    <div className={"character-info"}>
-      <CharacterPortrait state={state} dispatch={dispatch} />
-      <Descriptions className={"info-fields"} bordered={true} size={"small"} column={2}>
-        <DescriptionsItem label={"Level"}>{level}</DescriptionsItem>
-        <DescriptionsItem label={"Class"}>{charClass}</DescriptionsItem>
-        <DescriptionsItem label={"Ancestry"}>{ancestry}</DescriptionsItem>
-        <DescriptionsItem label={"Heritage"}>{heritage}</DescriptionsItem>
-        <DescriptionsItem label={"Background"}>{background}</DescriptionsItem>
-        <DescriptionsItem label={"Deity"}>{diety}</DescriptionsItem>
-        <DescriptionsItem label={"Size"}>{startCase(size)}</DescriptionsItem>
-        <DescriptionsItem label={"Exp"}>{exp}</DescriptionsItem>
-        <DescriptionsItem label={"Alignment"}>{alignment}</DescriptionsItem>
-        <DescriptionsItem label={"Hero Points"}>{hero_points}</DescriptionsItem>
-      </Descriptions>
+    <div className={"char-tab-content"}>
+      <div className={"char-tab-top"}>
+        <CharacterPortrait state={state} dispatch={dispatch} />
+        <Descriptions bordered={true} column={3} layout={"vertical"}>
+          <DescriptionsItem label={"Ancestry"}>{ancestry}</DescriptionsItem>
+          <DescriptionsItem label={"Class"}>{charClass}</DescriptionsItem>
+          <DescriptionsItem label={"Gender"}>{gender}</DescriptionsItem>
+          <DescriptionsItem label={"Heritage"}>{heritage}</DescriptionsItem>
+          <DescriptionsItem label={"Background"}>{background}</DescriptionsItem>
+          <DescriptionsItem label={"Pronouns"}>{pronouns}</DescriptionsItem>
+        </Descriptions>
+      </div>
+      <div className={"char-tab-bottom"}>
+        <Descriptions bordered={true} column={4} layout={"vertical"}>
+          <DescriptionsItem label={"Diety"}>{diety}</DescriptionsItem>
+          <DescriptionsItem label={"Age"}>{age}</DescriptionsItem>
+          <DescriptionsItem label={"Height"}>{height}</DescriptionsItem>
+          <DescriptionsItem label={"Weight"}>{weight}</DescriptionsItem>
+          <DescriptionsItem
+            label={"Personality"}
+            span={4}
+            className={"desc-item-with-desc"}
+          >
+            <Descriptions
+              bordered={true}
+              column={window.innerHeight > 800 ? 1 : 2}
+              size={"small"}
+            >
+              <DescriptionsItem label={"Attitude"}>
+                {personality.attitude}
+              </DescriptionsItem>
+              <DescriptionsItem label={"Beliefs"}>
+                {personality.beliefs}
+              </DescriptionsItem>
+              <DescriptionsItem label={"Likes"}>
+                {personality.likes}
+              </DescriptionsItem>
+              <DescriptionsItem label={"Dislikes"}>
+                {personality.dislikes}
+              </DescriptionsItem>
+            </Descriptions>
+          </DescriptionsItem>
+        </Descriptions>
+      </div>
     </div>
   );
 }

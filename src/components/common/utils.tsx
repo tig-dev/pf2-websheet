@@ -15,7 +15,7 @@ export const getAbilityMod = (mod: number): string => {
 };
 
 export const saveLocalChar = (state: mainStateType) => {
-  localStorage[state.character.name] = JSON.stringify(cloneDeep(state));
+  localStorage[state.character.info.name] = JSON.stringify(cloneDeep(state));
   message.success("Saved character!");
 };
 

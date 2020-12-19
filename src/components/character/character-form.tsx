@@ -26,13 +26,11 @@ function CharacterForm({ state, dispatch, setEditing }: CharacterFormProps) {
   }, []);
 
   const flatterChar: any = assignIn(
-    omit(character, "weapon_training"),
-    ...map(character.weapon_training, (prof: trainingType) => {
+    omit(character, "details.weapon_training"),
+    ...map(character.details.weapon_training, (prof: trainingType) => {
       return { [`weapon_training_${prof.name}`]: prof.training };
     })
   );
-
-  console.log(window.innerHeight);
 
   return (
     <Form
@@ -130,7 +128,7 @@ function CharacterForm({ state, dispatch, setEditing }: CharacterFormProps) {
           </Form.Item>
           <Input.Group className={"character-form-weapons"}>
             <span id={"form-weapons-head"}>Weapon Proficiences</span>
-            {map(character.weapon_training, (prof: trainingType) => {
+            {map(character.details.weapon_training, (prof: trainingType) => {
               return (
                 <Form.Item
                   key={`form-${prof.name}`}

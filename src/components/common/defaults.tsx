@@ -9,6 +9,8 @@ import {
   attackType,
   mainStateType,
   abilities,
+  characterInfoType,
+  characterDetailsType,
 } from "./types";
 
 export const baseSkill: skillType = {
@@ -73,46 +75,66 @@ export const baseAttack: attackType = {
   crit_effect: false,
 };
 
+export const characterInfoDefault: characterInfoType = {
+  name: "",
+  portrait: "",
+  ancestry: "Human",
+  heritage: "Human?",
+  class: "Commoner",
+  background: "Common",
+  diety: "Harvest",
+  age: 18,
+  gender: "None",
+  pronouns: "they/them",
+  height: "6 feet",
+  weight: "Prefer not to say",
+  personality: {
+    attitude: "Friendly",
+    beliefs: "Kindness",
+    likes: "Friends, pals, bros",
+    dislikes: "Foes, enemies, nemeses",
+    catchphrases: "Wheat!",
+  }
+};
+
+export const characterDetailsDefault: characterDetailsType = {
+  traits: "",
+  alignment: "N",
+  size: "medium",
+  level: 1,
+  exp: 0,
+  hero_points: 0,
+  languages: "Common",
+  weapon_training: [
+    {
+      name: "simple",
+      training: "U",
+    },
+    {
+      name: "martial",
+      training: "U",
+    },
+    {
+      name: "unarmed",
+      training: "U",
+    },
+  ],
+  abilities: {
+    strength: 10,
+    constitution: 10,
+    dexterity: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10,
+  },
+};
+
 export const mainStateDefault: mainStateType = {
   default: false,
   character: {
-    name: "",
-    portrait: "",
-    ancestry: "",
-    heritage: "",
-    class: "Commoner",
-    background: "",
-    diety: "",
-    alignment: "N",
-    size: "medium",
-    traits: "",
-    level: 1,
-    exp: 0,
-    hero_points: 0,
-    details: "",
-    languages: "Common",
-    weapon_training: [
-      {
-        name: "simple",
-        training: "U",
-      },
-      {
-        name: "martial",
-        training: "U",
-      },
-      {
-        name: "unarmed",
-        training: "U",
-      }
-    ],
-    abilities: {
-      strength: 10,
-      constitution: 10,
-      dexterity: 10,
-      intelligence: 10,
-      wisdom: 10,
-      charisma: 10,
-    },
+    info: characterInfoDefault,
+    details: characterDetailsDefault,
+    story: ""
   },
   feats: {
     class: [],
@@ -212,7 +234,7 @@ export const mainStateDefault: mainStateType = {
     hp: {
       current: 0,
       max: 0,
-      temp: 0
+      temp: 0,
     },
     armor: {
       ac_bonus: 0,
@@ -231,29 +253,29 @@ export const mainStateDefault: mainStateType = {
       training: "U",
       item_bonus: 0,
       misc_bonus: 0,
-      senses: ""
+      senses: "",
     },
     saves: {
       fortitude: {
         training: "U",
         itemBonus: 0,
-        miscBonus: 0
+        miscBonus: 0,
       },
       reflex: {
         training: "U",
         itemBonus: 0,
-        miscBonus: 0
+        miscBonus: 0,
       },
       will: {
         training: "U",
         itemBonus: 0,
-        miscBonus: 0
-      }
+        miscBonus: 0,
+      },
     },
     speed: {
       base: 25,
       misc_bonus: 0,
-      types: ""
+      types: "",
     },
     attacks: {
       melee: [],
@@ -346,6 +368,25 @@ export const mainStateDefault: mainStateType = {
       title: "General Notes",
       text: "Here are your general notes!",
     },
-    other: [],
+    other: [
+      {
+        ...cloneDeep(baseNote),
+        id: 1,
+        title: "Allies",
+        text: "You can list your allies here!",
+      },
+      {
+        ...cloneDeep(baseNote),
+        id: 2,
+        title: "Enemies",
+        text: "Here is where you might keep track of your enemies!",
+      },
+      {
+        ...cloneDeep(baseNote),
+        id: 3,
+        title: "Organizations",
+        text: "Groups you're apart of can go here!",
+      },
+    ],
   },
 };

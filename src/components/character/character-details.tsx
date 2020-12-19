@@ -3,6 +3,7 @@ import { map } from "lodash";
 import { Descriptions } from "antd";
 import DescriptionsItem from "antd/lib/descriptions/Item";
 
+import CharacterPortrait from "./character-portrait";
 import { WithReducerProps } from "../common/interfaces";
 import WeaponProf from "../common/components/weapon-prof";
 import { trainingType } from "../common/types";
@@ -14,10 +15,9 @@ function CharacterDetails({ state, dispatch }: CharacterDetailsProps) {
   const {
     abilities,
     languages,
-    details,
     weapon_training,
     traits,
-  } = state.character;
+  } = state.character.details;
   const {
     strength: str,
     dexterity: dex,
@@ -29,6 +29,7 @@ function CharacterDetails({ state, dispatch }: CharacterDetailsProps) {
 
   return (
     <div className={"character-details"}>
+      <CharacterPortrait state={state} dispatch={dispatch} />
       <Descriptions
         className={"details-top"}
         column={6}
@@ -86,19 +87,6 @@ function CharacterDetails({ state, dispatch }: CharacterDetailsProps) {
               );
             })}
           </div>
-        </DescriptionsItem>
-      </Descriptions>
-      <Descriptions
-        className={"details-bottom"}
-        column={1}
-        size={"small"}
-        bordered={true}
-        layout={"vertical"}
-      >
-        <DescriptionsItem label={"Background, Details, Notes"}>
-          {details
-            ? details
-            : "Write down some extra details about your character?"}
         </DescriptionsItem>
       </Descriptions>
     </div>

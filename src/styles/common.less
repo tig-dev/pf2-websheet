@@ -35,6 +35,35 @@ div.ant-tooltip {
   font-family: @header-font;
 }
 
+div.ant-descriptions-view {
+
+  &,
+  tr,
+  th,
+  td {
+    border-color: rgb(230, 230, 230) !important;
+  }
+
+  th {
+    background-color: rgb(245, 245, 245) !important;
+  }
+}
+
+td.ant-descriptions-item-content.desc-item-with-desc {
+  padding: 0;
+
+  &>.ant-descriptions {
+    padding: 0 10px;
+    background-color: rgb(250, 250, 250);
+
+    &>.ant-descriptions-view {
+      border-top: none;
+      border-bottom: none;
+    }
+  }
+}
+
+
 div.ant-card-head {
   display: flex;
   flex-direction: column;

@@ -43,7 +43,7 @@ export const MainReducer: MainReducerProps = (state, action) => {
     case "PORTRAIT": {
       // action.payload: base64 string for the image
       let newCharacter = cloneDeep(newState.character);
-      newCharacter = assignIn(newCharacter, {
+      newCharacter.info = assignIn(newCharacter.info, {
         portrait: action.payload,
       });
       newState = assignIn(newState, { character: newCharacter });

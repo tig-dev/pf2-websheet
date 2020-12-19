@@ -26,13 +26,13 @@ function WeaponProf({ proficiency, disable=true, setProf }: WeaponProfProps) {
   return (
     <div
       style={{
-        marginRight: "10px",
+        marginRight: "20px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
     >
-      <div style={{ paddingBottom: "3px", fontSize: "13px" }}>
+      <div style={{ paddingBottom: "3px", fontSize: "16px" }}>
         {startCase(name)}
       </div>
       <Radio.Group

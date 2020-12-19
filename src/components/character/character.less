@@ -183,69 +183,11 @@
             }
         }
 
-
-
-    }
-
-    .character-details {
-        width: @sheet-width;
-        flex-grow: 1;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: safe;
-        align-items: stretch;
-
-        .details-top {
-            .ant-descriptions-view {
-                border-radius: 2px 0 0 0;
-                border-bottom: none;
-            }
-        }
-
         .details-profs {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
-        }
-
-        .details-score {
-
-            &.ant-descriptions-item-label,
-            &.ant-descriptions-item-content {
-                text-align: center;
-            }
-
-            &.ant-descriptions-item-content {
-                font-size: 16px;
-                padding-bottom: 2px;
-                border-bottom: none;
-            }
-        }
-
-        th.details-score-mod {
-            display: none;
-        }
-
-        td.details-score-mod {
-            text-align: center;
-            font-size: 13px;
-            padding-top: 2px;
-            border-top: none;
-        }
-
-        .details-bottom {
-            .ant-descriptions-view {
-                border-radius: 0 0 2px 2px;
-                height: 100%;
-            }
-
-            .ant-descriptions-item-content {
-                min-height: calc(100% - 47.2833px)
-            }
-
-            flex-grow: 1;
         }
     }
 

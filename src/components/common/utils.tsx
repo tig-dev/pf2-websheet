@@ -1,5 +1,5 @@
 import { message } from "antd";
-import { cloneDeep, forEach, keys } from "lodash";
+import { cloneDeep, forEach, keys, isNil } from "lodash";
 
 import { mainStateDefault } from "./defaults";
 import { mainStateType } from "./types";
@@ -24,7 +24,14 @@ export const saveSessionChar = (state: mainStateType) => {
 };
 
 export const checkForSessionChar = (): boolean => {
-  return keys(sessionStorage).includes("lastChar");
+  if(keys(sessionStorage).includes("lastChar")) {
+    const lastChar = JSON.parse(sessionStorage["lastChar"]);
+    if(lastChar.character.info.name) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 export const getSessionChar = (): mainStateType => {
@@ -45,31 +52,28 @@ export const checkForDefault = (): boolean => {
 
 export const checkIfDefault = (name: string): boolean => {
   const character = JSON.parse(localStorage[name]);
-  if (character.default) {
-    return true;
-  }
-  return false;
+  return !!character.default;
 };
 
+export const setDefaultChar = (state: mainStateType): mainStateType => {
+  const newState = cloneDeep(state);
+  newState.default = true;
+  saveLocalChar(newState);
+  return newState
+}
+
 export const getDefaultChar = (): mainStateType => {
-  let returnChar = mainStateDefault;
+  let returnChar: mainStateType | null = null;
   forEach(keys(localStorage), (char: string) => {
-    const character = JSON.parse(localStorage[char]);
-    if (character.default) {
-      returnChar = character;
+    let state = JSON.parse(localStorage[char]);
+    if (state.default) {
+      returnChar = cloneDeep(state);
     }
   });
-  return returnChar;
+
+  return !isNil(returnChar) ? returnChar : mainStateDefault;
 };
 
 export const setAndGetDefaultChar = (name: string): mainStateType => {
-  let returnChar = mainStateDefault;
-  forEach(keys(localStorage), (char: string) => {
-    let character = JSON.parse(localStorage[char]);
-    if (character.character.name === name) {
-      character.default = true;
-      returnChar = character;
-    }
-  });
-  return returnChar;
+  return setDefaultChar(JSON.parse(localStorage[name]));
 };

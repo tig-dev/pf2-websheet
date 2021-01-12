@@ -68,6 +68,8 @@ const CharacterFormDetails = ({state, dispatch}: CharacterFormTabProps) => {
           />}
         >
           <Button
+            // TODO: un-disable once dynamic weapon training is a thing
+            disabled={true}
             icon={<PlusOutlined/>}
             onClick={() => setPopVisible(true)}
             type={"primary"}

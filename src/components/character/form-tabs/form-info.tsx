@@ -77,7 +77,7 @@ const CharacterFormInfo = () => {
         <Form.Item
           key={"form-dislikes"}
           label={"Dislikes"}
-          name={["info", "personality", "attitude"]}
+          name={["info", "personality", "dislikes"]}
         >
           <Input/>
         </Form.Item>

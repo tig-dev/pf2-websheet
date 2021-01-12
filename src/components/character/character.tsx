@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Button, Descriptions, Tabs, Form} from "antd";
-import {assignIn, omit} from "lodash";
+import {assignIn, omit, isNil} from "lodash";
 import {EditFilled, CheckOutlined, CloseOutlined} from "@ant-design/icons";
 
 import "./character.less";
@@ -29,6 +29,7 @@ const Character = ({state, dispatch}: CharacterProps) => {
 
   const handleFormSave = (): void => {
     let newChar = form.getFieldsValue();
+    let portrait = state.character.info.portrait;
 
     // TODO: dynamic proficiency setting
     const weapProf: trainingType[] = [
@@ -50,13 +51,20 @@ const Character = ({state, dispatch}: CharacterProps) => {
       "weapon_training_simple",
       "weapon_training_martial",
       "weapon_training_unarmed",
-      "weapon_training_other"
     );
-    newChar['details']["weapon_training"] = weapProf;
+    if(isNil(newChar.details)) {
+      newChar = assignIn(newChar, {details: {}})
+    }
+    newChar.details = assignIn(newChar.details, {weapon_training: weapProf});
+    newChar.info = assignIn(newChar.info, {portrait: portrait})
 
     dispatch({
       type: "CHARACTER",
-      payload: assignIn(state.character, newChar),
+      payload: {
+        info: assignIn(state.character.info, newChar.info),
+        details: assignIn(state.character.details, newChar.details),
+        story: newChar.story ? newChar.story : state.character.story,
+      },
     });
     setEditing(false);
   }

@@ -1,3 +1,4 @@
+import { FormInstance } from "antd/lib/form";
 import { mainStateType, dispatchActionType } from "./types";
 
 export interface WithReducerProps {
@@ -5,8 +6,10 @@ export interface WithReducerProps {
   dispatch(action: dispatchActionType): void;
 }
 
-export interface EditStateWithReducerProps {
+export interface EditStateWithReducerProps extends WithReducerProps {
   setEditing(val: boolean): void;
-  state: mainStateType;
-  dispatch(action: dispatchActionType): void;
+}
+
+export interface CharacterFormTabProps extends WithReducerProps {
+  form: FormInstance<any>;
 }

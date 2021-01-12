@@ -149,7 +149,7 @@ export type characterInfoType = {
   heritage: string;
   class: string;
   background: string;
-  diety: string;
+  deity: string;
   age: number;
   gender: string;
   pronouns: string;

@@ -1,20 +1,73 @@
-import React, { useState } from "react";
-import { Button, Descriptions, Tabs } from "antd";
-import { EditFilled } from "@ant-design/icons";
+import React, {useState, useEffect} from "react";
+import {Button, Descriptions, Tabs, Form} from "antd";
+import {assignIn, omit} from "lodash";
+import {EditFilled, CheckOutlined, CloseOutlined} from "@ant-design/icons";
 
 import "./character.less";
-import CharacterInfo from "./character-info";
-import CharacterDetails from "./character-details";
-import CharacterStory from "./character-story";
+import CharacterInfo from "./char-tabs/character-info";
+import CharacterDetails from "./char-tabs/character-details";
+import CharacterStory from "./char-tabs/character-story";
 import CharacterForm from "./character-form";
-import { WithReducerProps } from "../common/interfaces";
+import {WithReducerProps} from "../common/interfaces";
+import {trainingType} from "../common/types";
+import {getSessionChar} from "../common/utils";
 
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
-export interface CharacterProps extends WithReducerProps {}
+export interface CharacterProps extends WithReducerProps {
+}
 
-function Character({ state, dispatch }: CharacterProps) {
+const Character = ({state, dispatch}: CharacterProps) => {
+  const [form] = Form.useForm();
   const [editing, setEditing] = useState<boolean>(false);
+
+  useEffect(() => {
+    dispatch({
+      type: "SAVE",
+    })
+  }, [dispatch])
+
+  const handleFormSave = (): void => {
+    let newChar = form.getFieldsValue();
+
+    // TODO: dynamic proficiency setting
+    const weapProf: trainingType[] = [
+      {
+        name: "simple",
+        training: newChar["weapon_training_simple"],
+      },
+      {
+        name: "martial",
+        training: newChar["weapon_training_martial"],
+      },
+      {
+        name: "unarmed",
+        training: newChar["weapon_training_unarmed"],
+      },
+    ];
+    newChar = omit(
+      newChar,
+      "weapon_training_simple",
+      "weapon_training_martial",
+      "weapon_training_unarmed",
+      "weapon_training_other"
+    );
+    newChar['details']["weapon_training"] = weapProf;
+
+    dispatch({
+      type: "CHARACTER",
+      payload: assignIn(state.character, newChar),
+    });
+    setEditing(false);
+  }
+
+  const handleFormCancel = () => {
+    dispatch({
+      type: "LOAD",
+      payload: getSessionChar(),
+    });
+    setEditing(false);
+  }
 
   if (!editing) {
     return (
@@ -31,11 +84,9 @@ function Character({ state, dispatch }: CharacterProps) {
               type={"primary"}
               className={"blue-button"}
               size={"large"}
-              icon={<EditFilled />}
+              icon={<EditFilled/>}
               onClick={() => setEditing(true)}
-            >
-              Edit
-            </Button>
+            />
           }
         />
         <Tabs
@@ -44,13 +95,13 @@ function Character({ state, dispatch }: CharacterProps) {
           size={"large"}
         >
           <TabPane tab={"Info"} key={"1"}>
-            <CharacterInfo state={state} dispatch={dispatch} />
+            <CharacterInfo state={state} dispatch={dispatch}/>
           </TabPane>
           <TabPane tab={"Details"} key={"2"}>
-            <CharacterDetails state={state} dispatch={dispatch} />
+            <CharacterDetails state={state} dispatch={dispatch}/>
           </TabPane>
           <TabPane tab={"Story"} key={"3"}>
-            <CharacterStory state={state} dispatch={dispatch} />
+            <CharacterStory state={state} dispatch={dispatch}/>
           </TabPane>
         </Tabs>
       </div>
@@ -62,16 +113,27 @@ function Character({ state, dispatch }: CharacterProps) {
           className={"character-title"}
           title={"Edit Character Information"}
           extra={
-            <Button
-              type={"primary"}
-              className={"blue-button"}
-              icon={<EditFilled />}
-              onClick={() => setEditing(true)}
-            />
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+              <Button
+                type={"primary"}
+                className={"red-button"}
+                size={"large"}
+                icon={<CloseOutlined/>}
+                onClick={handleFormCancel}
+              />
+              <Button
+                style={{marginLeft: "10px"}}
+                type={"primary"}
+                className={"green-button"}
+                size={"large"}
+                icon={<CheckOutlined/>}
+                onClick={handleFormSave}
+              />
+            </div>
           }
         />
-        {/* TODO: add tabs to match non-editing content */}
         <CharacterForm
+          form={form}
           setEditing={setEditing}
           state={state}
           dispatch={dispatch}

@@ -2,8 +2,8 @@ import React from "react";
 import { Descriptions } from "antd";
 import DescriptionsItem from "antd/lib/descriptions/Item";
 
-import CharacterPortrait from "./character-portrait";
-import { WithReducerProps } from "../common/interfaces";
+import CharacterPortrait from "../character-portrait";
+import { WithReducerProps } from "../../common/interfaces";
 
 export interface CharacterInfoProps extends WithReducerProps {}
 
@@ -13,7 +13,7 @@ function CharacterInfo({ state, dispatch }: CharacterInfoProps) {
     heritage,
     background,
     class: charClass,
-    diety,
+    deity,
     age,
     gender,
     pronouns,
@@ -37,7 +37,7 @@ function CharacterInfo({ state, dispatch }: CharacterInfoProps) {
       </div>
       <div className={"char-tab-bottom"}>
         <Descriptions bordered={true} column={4} layout={"vertical"}>
-          <DescriptionsItem label={"Diety"}>{diety}</DescriptionsItem>
+          <DescriptionsItem label={"Deity"}>{deity}</DescriptionsItem>
           <DescriptionsItem label={"Age"}>{age}</DescriptionsItem>
           <DescriptionsItem label={"Height"}>{height}</DescriptionsItem>
           <DescriptionsItem label={"Weight"}>{weight}</DescriptionsItem>

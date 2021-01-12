@@ -14,11 +14,11 @@ export interface CharacterPortraitProps extends WithReducerProps {
   editing?: boolean;
 }
 
-function CharacterPortrait({
+const CharacterPortrait = ({
   state,
   dispatch,
   editing = false,
-}: CharacterPortraitProps) {
+}: CharacterPortraitProps) => {
   const [imageUrl, setImageURL] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 

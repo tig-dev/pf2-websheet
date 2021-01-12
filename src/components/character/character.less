@@ -4,262 +4,341 @@
 @sheet-width: 98%;
 
 .antd-img-crop-modal {
-    .ant-modal-footer {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
+  .ant-modal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 
-        .ant-btn {
-            border-radius: 4px;
+    .ant-btn {
+      border-radius: 4px;
 
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .ant-btn-primary {
-            background-color: @green-7;
-            border-color: @green-8;
-
-            &:hover,
-            &:active,
-            &:focus {
-                background-color: @green-6;
-                border-color: @green-7;
-            }
-        }
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
+
+    .ant-btn-primary {
+      background-color: @green-7;
+      border-color: @green-8;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: @green-6;
+        border-color: @green-7;
+      }
+    }
+  }
 }
 
 .character-content {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media (max-height: 768px) {
+    .ant-descriptions {
+      .ant-descriptions-item-content {
+        font-size: 14px;
+      }
+
+      .ant-descriptions-item-label {
+        font-size: 16px;
+        font-weight: 500;
+        font-family: @header-font;
+      }
+    }
+  }
+
+  .ant-descriptions {
+    .ant-descriptions-item-content {
+      font-size: @body-size;
+    }
+
+    .ant-descriptions-item-label {
+      font-size: @subheader-size;
+      font-weight: 500;
+      font-family: @header-font;
+    }
+  }
+
+  .character-title {
+    .ant-descriptions-header {
+      padding-bottom: 2px;
+      border-bottom: 1px solid rgb(200, 200, 200);
+      margin-bottom: 5px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .ant-descriptions-title {
+        margin-left: 20px;
+
+        font-family: @header-font;
+        font-size: 36px;
+        line-height: 1.2;
+      }
+
+      .ant-btn-primary {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 4px;
+
+        .anticon {
+          height: 22px;
+          font-size: 22px;
+        }
+      }
+    }
+  }
+
+  .character-tabs,
+  .character-form-tabs {
+    width: @sheet-width;
+    margin-bottom: 5px;
+
+    .ant-tabs-tab {
+      font-family: @header-font;
+      font-size: 17px;
+
+      margin-right: 0;
+      padding: 7px 24px 12px;
+    }
+  }
+
+  .character-form-tabs {
+    max-height: calc(100% - 60px);
+    overflow-x: auto;
+  }
+
+  .character-form-tabs .char-tab-content {
+    max-height: 100%;
+
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .char-tab-content.form-info {
+    .form-item-group {
+      width: 45%;
+      flex-basis: 45%;
+    }
+
+    .ant-form-item {
+      width: 45%;
+      flex-basis: 45%;
+    }
+  }
+
+  .char-tab-content.form-details {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .form-details-col {
+      width: 30%;
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+
+    .form-item-group {
+      width: 100%;
+    }
+
+    .ant-form-item {
+      width: 100%;
+    }
+  }
+
+  .char-tab-content {
+    width: @sheet-width;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: stretch;
 
-    @media(max-height: 768px) {
-        .ant-descriptions {
-            .ant-descriptions-item-content {
-                font-size: 14px;
-            }
+    .char-tab-top,
+    .char-tab-bottom {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: stretch;
 
-            .ant-descriptions-item-label {
-                font-size: 16px;
-                font-weight: 500;
-                font-family: @header-font;
-            }
-        }
+      .ant-descriptions {
+        flex-grow: 1;
+      }
     }
 
-    .ant-descriptions {
-        .ant-descriptions-item-content {
-            font-size: @body-size;
-        }
-
-        .ant-descriptions-item-label {
-            font-size: @subheader-size;
-            font-weight: 500;
-            font-family: @header-font;
-        }
+    .char-tab-top {
+      .ant-descriptions-view {
+        border-bottom: none;
+        border-radius: 2px 2px 0 0;
+      }
     }
 
-    .character-title {
-        .ant-descriptions-header {
-            padding-bottom: 2px;
-            border-bottom: 1px solid rgb(200, 200, 200);
-            margin-bottom: 5px;
-
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-
-            .ant-descriptions-title {
-                margin-left: 20px;
-
-                font-family: @header-font;
-                font-size: 36px;
-                line-height: 1.2;
-            }
-
-            .ant-btn-primary {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-
-                font-size: 18px;
-            }
-        }
+    @media (min-height: 768px) {
+      .character-portrait {
+        height: 200px;
+        width: 200px;
+      }
     }
 
-    .character-tabs {
-        width: @sheet-width;
-        margin-bottom: 5px;
 
-        .ant-tabs-tab {
-            font-family: @header-font;
-            font-size: 17px;
+    &.big-portrait {
+      height: 500px;
+      width: 100%;
 
-            margin-right: 0;
-            padding: 7px 24px 12px;
-        }
-    }
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
 
-    @media(min-height: 768px) {
-        .character-portrait {
-            height: 200px;
-            width: 200px;
-        }
+      .character-portrait {
+        height: 500px;
+        width: 500px;
+      }
     }
 
     .character-portrait {
-        flex-grow: 0;
-        height: 233px;
-        width: 233px;
+      flex-grow: 0;
+      height: 233px;
+      width: 233px;
 
-        margin-right: 5px;
+      margin-right: 4px;
 
-        .portrait-uploader {
-            height: 100%;
-            width: 100%;
-
-            &.uploaded {
-                .ant-upload {
-                    border: none;
-                }
-            }
-
-            .ant-upload {
-                height: 100%;
-                width: 100%;
-                margin: 0;
-            }
-        }
-
-        img {
-            height: 100%;
-            width: 100%;
-        }
-
-        .portrait-prompt {
-            font-family: @header-font;
-            font-size: @subheader-size;
-
-            .anticon {
-                font-size: 24px;
-            }
-        }
-    }
-
-    .char-tab-content {
-        width: @sheet-width;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-
-        .char-tab-top,
-        .char-tab-bottom {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: stretch;
-
-            .ant-descriptions {
-                flex-grow: 1;
-            }
-        }
-
-        .char-tab-top {
-            .ant-descriptions-view {
-                border-bottom: none;
-                border-radius: 2px 2px 0 0;
-            }
-        }
-
-        .details-profs {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-
-    .character-form {
-        max-height: 80vh;
-        max-width: calc(100vw - 200px);
-        width: @sheet-width;
-
-        padding-top: 10px;
-
-        display: flex;
-        flex-flow: column nowrap;
-
-        height: 90%;
+      .portrait-uploader {
+        height: 100%;
         width: 100%;
 
-        .character-form-weapons {
-            #form-weapons-head {
-                font-family: @header-font;
-                font-size: 16px;
-            }
-
-            label {
-                padding-left: 5px;
-            }
+        &.uploaded {
+          .ant-upload {
+            border: none;
+          }
         }
 
-        @media(min-height: 768px) {
-            .ant-form-item {
-                margin-bottom: 10px;
-            }
+        .ant-upload {
+          height: 100%;
+          width: 100%;
+          margin: 0;
         }
+      }
 
-        .ant-form-item {
-            margin-left: 5px;
-            margin-right: 5px;
-            margin-bottom: 15px;
+      img {
+        height: 100%;
+        width: 100%;
+      }
 
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
+      .portrait-prompt {
+        font-family: @header-font;
+        font-size: @subheader-size;
 
-            label {
-                font-family: @header-font;
-                font-size: 16px;
-                max-width: 110px;
-                line-height: 1;
-                white-space: normal;
-                overflow-wrap: normal;
-            }
-
-            .ant-form-item-control {
-                font-size: 15px;
-                width: 100%;
-
-                .ant-input-number {
-                    width: unset;
-                }
-
-            }
+        .anticon {
+          font-size: 24px;
         }
-
-        .character-form-btn {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-
-            .ant-btn {
-                width: 30%;
-            }
-        }
+      }
     }
+
+    .details-profs {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .character-form {
+    height: calc(100% - 55px);
+    width: @sheet-width;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    .ant-tabs-content {
+      max-height: 100%;
+    }
+
+    .form-item-group {
+      .ant-form-item {
+        width: 100%;
+      }
+
+      span.item-group-header {
+        font-family: @header-font;
+        font-size: 16px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      label {
+        padding: 0 10px;
+      }
+    }
+
+    @media (min-height: 768px) {
+      .ant-form-item {
+        margin-bottom: 10px;
+      }
+    }
+
+    .ant-form-item {
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-bottom: 15px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      label {
+        font-family: @header-font;
+        font-size: 16px;
+        max-width: 110px;
+        line-height: 1;
+        white-space: normal;
+        overflow-wrap: normal;
+      }
+
+      .ant-form-item-control {
+          font-size: 15px;
+          width: 100%;
+
+          .ant-input-number {
+              width: unset;
+          }
+      }
+    }
+
+    .char-form-story {
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      .ant-col-offset-1 {
+        margin: 0 15px;
+      }
+    }
+  }
 
 }

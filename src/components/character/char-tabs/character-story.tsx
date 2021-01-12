@@ -2,11 +2,11 @@ import React from "react";
 import { Descriptions } from "antd";
 import DescriptionsItem from "antd/lib/descriptions/Item";
 
-import { WithReducerProps } from "../common/interfaces";
+import { WithReducerProps } from "../../common/interfaces";
 
 export interface CharacterStoryProps extends WithReducerProps {}
 
-function CharacterStory({ state, dispatch }: CharacterStoryProps) {
+const CharacterStory = ({ state, dispatch }: CharacterStoryProps) => {
   const name = state.character.info.name;
   const story = state.character.story;
 

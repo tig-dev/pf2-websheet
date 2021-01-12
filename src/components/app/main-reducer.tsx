@@ -7,6 +7,7 @@ import { saveSessionChar } from "../common/utils";
 export type mainReducerActionType =
   | "NEW"
   | "LOAD"
+  | "SAVE"
   | "CHARACTER"
   | "PORTRAIT"
   | "NOTES";
@@ -72,6 +73,10 @@ export const MainReducer: MainReducerProps = (state, action) => {
           notes: newNotes,
         });
       }
+      break;
+    }
+
+    case "SAVE": {
       break;
     }
 

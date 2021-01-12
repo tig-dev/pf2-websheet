@@ -3,15 +3,15 @@ import { map, startCase } from "lodash";
 import { Descriptions } from "antd";
 import DescriptionsItem from "antd/lib/descriptions/Item";
 
-import CharacterPortrait from "./character-portrait";
-import { WithReducerProps } from "../common/interfaces";
-import WeaponProf from "../common/components/weapon-prof";
-import { trainingType } from "../common/types";
-import { getAbilityMod as getMod } from "../common/utils";
+import CharacterPortrait from "../character-portrait";
+import { WithReducerProps } from "../../common/interfaces";
+import WeaponProf from "../../common/components/weapon-prof";
+import { trainingType } from "../../common/types";
+import { getAbilityMod as getMod } from "../../common/utils";
 
 export interface CharacterDetailsProps extends WithReducerProps {}
 
-function CharacterDetails({ state, dispatch }: CharacterDetailsProps) {
+const CharacterDetails = ({ state, dispatch }: CharacterDetailsProps) => {
   const { class: charClass } = state.character.info;
   const {
     traits,

@@ -82,7 +82,7 @@ export const characterInfoDefault: characterInfoType = {
   heritage: "Human?",
   class: "Commoner",
   background: "Common",
-  diety: "Harvest",
+  deity: "Harvest",
   age: 18,
   gender: "None",
   pronouns: "they/them",

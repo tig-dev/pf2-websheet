@@ -14,11 +14,11 @@ export interface CharacterPortraitProps extends WithReducerProps {
   editing?: boolean;
 }
 
-const CharacterPortrait = ({
+const CharacterPortrait = ( {
   state,
   dispatch,
   editing = false,
-}: CharacterPortraitProps) => {
+}: CharacterPortraitProps ) => {
   const [imageUrl, setImageURL] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -26,20 +26,20 @@ const CharacterPortrait = ({
 
   const outerReader = new FileReader();
   outerReader.onloadend = () => {
-    if (typeof outerReader.result === "string") {
+    if ( typeof outerReader.result === "string" ) {
       setImageURL(outerReader.result);
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (portrait && !imageUrl) {
+    if ( portrait && !imageUrl ) {
       setImageURL(portrait);
     }
   }, [portrait, imageUrl, setImageURL]);
 
   useEffect(() => {
-    if (imageUrl && imageUrl !== portrait) {
+    if ( imageUrl && imageUrl !== portrait ) {
       dispatch({
         type: "PORTRAIT",
         payload: imageUrl,
@@ -47,24 +47,24 @@ const CharacterPortrait = ({
     }
   }, [imageUrl, dispatch, portrait]);
 
-  const handlePortraitPreview = async (file: UploadFile<any>) => {
+  const handlePortraitPreview = async ( file: UploadFile<any> ) => {
     let src = file.url;
-    if (isNil(src)) {
-      src = await new Promise((resolve) => {
+    if ( isNil(src) ) {
+      src = await new Promise(( resolve ) => {
         const reader = new FileReader();
         reader.onloadend = () => {
-          if (typeof reader.result === "string") {
+          if ( typeof reader.result === "string" ) {
             resolve(reader.result);
           }
         };
 
-        if (!isNil(file.originFileObj)) {
+        if ( !isNil(file.originFileObj) ) {
           reader.readAsDataURL(file.originFileObj);
         }
       });
     }
 
-    if (src) {
+    if ( src ) {
       const image = new Image();
       image.src = src;
       const imgWindow = window.open(src);
@@ -72,7 +72,7 @@ const CharacterPortrait = ({
     }
   };
 
-  if (editing) {
+  if ( editing ) {
     return (
       <div className={"character-portrait"}>
         <ImgCrop rotate={true}>
@@ -85,7 +85,7 @@ const CharacterPortrait = ({
             showUploadList={false}
             multiple={false}
             onPreview={handlePortraitPreview}
-            beforeUpload={(file) => {
+            beforeUpload={( file ) => {
               outerReader.readAsDataURL(file);
               return false;
             }}
@@ -98,25 +98,27 @@ const CharacterPortrait = ({
                 />
               </Tooltip>
             ) : (
-              <div className={"portrait-prompt"}>
-                {loading ? <LoadingOutlined /> : <UploadOutlined />}
-                <div>Upload</div>
-              </div>
-            )}
+               <div className={"portrait-prompt"}>
+                 {loading ? <LoadingOutlined/> : <UploadOutlined/>}
+                 <div>Upload</div>
+               </div>
+             )}
           </Upload>
         </ImgCrop>
       </div>
     );
-  } else if (imageUrl) {
+  }
+  else if ( imageUrl ) {
     return (
       <div className={"character-portrait"}>
-        <img src={imageUrl} alt={`Portrait for ${state.character.info.name}`} />
+        <img src={imageUrl} alt={`Portrait for ${state.character.info.name}`}/>
       </div>
     );
-  } else {
+  }
+  else {
     return (
       <div className={"character-portrait"}>
-        <img alt={"Empty Portrait"} src={emptyImageSrc} />
+        <img alt={"Empty Portrait"} src={emptyImageSrc}/>
       </div>
     );
   }
@@ -155,6 +157,6 @@ const CharacterPortrait = ({
   //     </ImgCrop>
   //   </div>
   // );
-}
+};
 
 export default CharacterPortrait;

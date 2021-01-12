@@ -1,15 +1,15 @@
-import React, {useCallback, useMemo, useState} from "react";
-import {Button, Form, Input, InputNumber, Select, Popover, Tooltip} from "antd";
-import {cloneDeep, map, startCase, uniqBy, assignIn} from "lodash";
-import {PlusOutlined, CheckOutlined} from "@ant-design/icons";
+import React, { useCallback, useMemo, useState } from "react";
+import { Button, Form, Input, InputNumber, Select, Popover, Tooltip } from "antd";
+import { cloneDeep, map, startCase, uniqBy, assignIn } from "lodash";
+import { PlusOutlined, CheckOutlined } from "@ant-design/icons";
 
-import {CharacterFormTabProps} from "../../common/interfaces";
-import {trainingType} from "../../common/types";
+import { CharacterFormTabProps } from "../../common/interfaces";
+import { trainingType } from "../../common/types";
 
-const {Option} = Select;
+const { Option } = Select;
 
-const CharacterFormDetails = ({state, dispatch}: CharacterFormTabProps) => {
-  const {character} = state;
+const CharacterFormDetails = ( { state, dispatch }: CharacterFormTabProps ) => {
+  const { character } = state;
   const [popVisible, setPopVisible] = useState<boolean>(false);
 
   const weaponSelect = useCallback((): JSX.Element => {
@@ -24,39 +24,41 @@ const CharacterFormDetails = ({state, dispatch}: CharacterFormTabProps) => {
     );
   }, []);
 
-  const addWeaponProf = useCallback((name: string): void => {
-    let newChar = cloneDeep(character)
+  const addWeaponProf = useCallback(( name: string ): void => {
+    let newChar = cloneDeep(character);
     const newProf: trainingType = {
       name: name.toLowerCase(),
       training: "U"
-    }
+    };
     newChar.details.weapon_training = uniqBy([...cloneDeep(character.details.weapon_training), newProf], "name");
-    newChar = assignIn(newChar, {[`weapon_training_${name.toLowerCase()}`]: "U"})
+    newChar = assignIn(newChar, { [`weapon_training_${name.toLowerCase()}`]: "U" });
 
     dispatch({
       type: "CHARACTER",
       payload: newChar,
-    })
-  },[character, dispatch])
+    });
+  }, [character, dispatch]);
 
   const weaponButton = useMemo(() => {
-    if(character.details.weapon_training.length >= 5) {
+    if ( character.details.weapon_training.length >= 5 ) {
       return (
         <Tooltip title={"No more proficiencies can be added."}>
-          <Button icon={<PlusOutlined/>} disabled={true} type={"primary"} size={"small"} className={"blue-button"}>Add</Button>
+          <Button icon={<PlusOutlined/>} disabled={true} type={"primary"} size={"small"}
+                  className={"blue-button"}>Add</Button>
         </Tooltip>
-      )
-    } else {
+      );
+    }
+    else {
       return (
         <Popover
           visible={popVisible}
           content={<Input.Search
             size={"large"}
-            onSearch={(value) => {
+            onSearch={( value ) => {
               addWeaponProf(value);
               setPopVisible(false);
             }}
-            style={{borderRadius: "4px"}}
+            style={{ borderRadius: "4px" }}
             placeholder={"Proficiency name"}
             enterButton={
               <Button
@@ -77,9 +79,9 @@ const CharacterFormDetails = ({state, dispatch}: CharacterFormTabProps) => {
             Add
           </Button>
         </Popover>
-      )
+      );
     }
-  }, [character.details.weapon_training, popVisible, addWeaponProf])
+  }, [character.details.weapon_training, popVisible, addWeaponProf]);
 
   const weaponProficiencies = useMemo(() => (
     <Input.Group className={"form-item-group"}>
@@ -87,7 +89,7 @@ const CharacterFormDetails = ({state, dispatch}: CharacterFormTabProps) => {
         Weapon Proficiencies
         {weaponButton}
       </span>
-      {map(character.details.weapon_training, (prof: trainingType) => {
+      {map(character.details.weapon_training, ( prof: trainingType ) => {
         return (
           <Form.Item
             key={`form-${prof.name}`}
@@ -99,7 +101,7 @@ const CharacterFormDetails = ({state, dispatch}: CharacterFormTabProps) => {
         );
       })}
     </Input.Group>
-  ), [character.details.weapon_training, weaponSelect, weaponButton])
+  ), [character.details.weapon_training, weaponSelect, weaponButton]);
 
   return (
     <div className={"char-tab-content form-details"}>
@@ -199,7 +201,7 @@ const CharacterFormDetails = ({state, dispatch}: CharacterFormTabProps) => {
           <InputNumber min={6} max={30}/>
         </Form.Item>
       </div>
-    </div>);
-}
+    </div> );
+};
 
 export default CharacterFormDetails;

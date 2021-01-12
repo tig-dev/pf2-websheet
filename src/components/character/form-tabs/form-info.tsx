@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Input} from "antd";
+import { Form, Input } from "antd";
 
 const CharacterFormInfo = () => {
   return (
@@ -77,7 +77,7 @@ const CharacterFormInfo = () => {
         <Form.Item
           key={"form-dislikes"}
           label={"Dislikes"}
-          name={["info", "personality", "attitude"]}
+          name={["info", "personality", "dislikes"]}
         >
           <Input/>
         </Form.Item>
@@ -89,7 +89,7 @@ const CharacterFormInfo = () => {
           <Input/>
         </Form.Item>
       </Input.Group>
-    </div>);
-}
+    </div> );
+};
 
 export default CharacterFormInfo;
